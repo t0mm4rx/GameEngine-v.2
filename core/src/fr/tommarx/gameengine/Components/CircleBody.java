@@ -6,17 +6,16 @@ import com.badlogic.gdx.physics.box2d.CircleShape;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Game.GameObject;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Util.Math;
 
 public class CircleBody extends Component{
 
-    private GameObject go;
     private com.badlogic.gdx.physics.box2d.Body body;
     private float radius;
 
-    public CircleBody(GameObject go, BodyDef.BodyType bodyType) {
-        this.go = go;
+    public CircleBody(AbstractGameObject go, BodyDef.BodyType bodyType) {
+        super(go);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
         bodyDef.position.set(go.getTransform().getPosition().x, go.getTransform().getPosition().y);
@@ -27,7 +26,7 @@ public class CircleBody extends Component{
             shape.setRadius(go.getSpriteRenderer().getTexture().getWidth() / 2 * go.getTransform().getScale().x);
             radius = go.getSpriteRenderer().getTexture().getWidth() / 2 * go.getTransform().getScale().x;
         } else {
-            System.err.println("Warning ! The given gameobject has no sprite renderer, please use CircleBody(GameObject go, float radius, BodyDef.BodyType bodyType) constructor.");
+            System.err.println("Warning ! The given gameobject has no sprite renderer, please use CircleBody(AbstractGameObject go, float radius, BodyDef.BodyType bodyType) constructor.");
             shape.setRadius(10);
             radius = 10;
         }
@@ -38,8 +37,8 @@ public class CircleBody extends Component{
         shape.dispose();
     }
 
-    public CircleBody(GameObject go, float radius, BodyDef.BodyType bodyType) {
-        this.go = go;
+    public CircleBody(AbstractGameObject go, float radius, BodyDef.BodyType bodyType) {
+        super(go);
         this.radius = radius;
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
@@ -64,8 +63,8 @@ public class CircleBody extends Component{
     }
 
     public void update() {
-        go.getTransform().setPosition(body.getPosition());
-        go.getTransform().setRotation(Math.RadianToDegree(body.getAngle()));
+        getGameObject().getTransform().setPosition(body.getPosition());
+        getGameObject().getTransform().setRotation(Math.RadianToDegree(body.getAngle()));
     }
 
     public void dispose() {

@@ -4,50 +4,32 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Vector2;
 
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Game.GameObject;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 
 public class SpriteRenderer extends Component {
 
     private TextureRegion texture;
-    private GameObject go;
     private float width;
     private float height;
-    private float offsetX;
-    private float offsetY;
 
-    public SpriteRenderer (GameObject go, FileHandle texture) {
+    public SpriteRenderer (AbstractGameObject go, FileHandle texture) {
+        super(go);
         this.texture = new TextureRegion(new Texture(texture));
-        this.go = go;
         width = getTexture().getWidth();
         height = getTexture().getHeight();
-        offsetX = 0;
-        offsetY = 0;
     }
 
-    public SpriteRenderer (GameObject go, FileHandle texture, float offsetX, float offsetY) {
+    public SpriteRenderer (AbstractGameObject go, FileHandle texture, float offsetX, float offsetY) {
+        super(go);
         this.texture = new TextureRegion(new Texture(texture));
-        this.go = go;
         width = getTexture().getWidth();
         height = getTexture().getHeight();
         this.offsetX = offsetX;
         this.offsetY = offsetY;
     }
 
-    public void setOffset(float x, float y) {
-        offsetX = x;
-        offsetY = y;
-    }
-
-    public float getOffsetX() {
-        return offsetX;
-    }
-
-    public float getOffsetY() {
-        return offsetY;
-    }
 
     public void setTexture(TextureRegion texture) {
         this.texture = texture;
@@ -55,29 +37,29 @@ public class SpriteRenderer extends Component {
 
     public void render() {
         Game.batch.draw(texture,
-                go.getTransform().getPosition().x - width / 2 + offsetX,
-                go.getTransform().getPosition().y - height / 2 + offsetY,
+                getGameObject().getTransform().getPosition().x - width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y - height / 2 + offsetY,
                 width / 2,
                 height / 2,
                 width,
                 height,
-                go.getTransform().getScale().x,
-                go.getTransform().getScale().y,
-                go.getTransform().getRotation());
+                getGameObject().getTransform().getScale().x,
+                getGameObject().getTransform().getScale().y,
+                getGameObject().getTransform().getRotation());
 
     }
 
     public void renderInHUD() {
         Game.HUDbatch.draw(texture,
-                go.getTransform().getPosition().x - width / 2 + offsetX,
-                go.getTransform().getPosition().y - height / 2 + offsetY,
+                getGameObject().getTransform().getPosition().x - width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y - height / 2 + offsetY,
                 width / 2,
                 height / 2,
                 width,
                 height,
-                go.getTransform().getScale().x,
-                go.getTransform().getScale().y,
-                go.getTransform().getRotation());
+                getGameObject().getTransform().getScale().x,
+                getGameObject().getTransform().getScale().y,
+                getGameObject().getTransform().getRotation());
     }
 
     public Texture getTexture() {

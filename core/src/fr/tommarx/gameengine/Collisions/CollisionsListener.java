@@ -1,10 +1,10 @@
 package fr.tommarx.gameengine.Collisions;
 
-import fr.tommarx.gameengine.Game.GameObject;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 
 public interface CollisionsListener {
 
-    void collisionEnter(GameObject a, GameObject b);
-    void collisionEnd(GameObject a, GameObject b);
+    void collisionEnter(AbstractGameObject a, AbstractGameObject b);
+    void collisionEnd(AbstractGameObject a, AbstractGameObject b);
 
 }

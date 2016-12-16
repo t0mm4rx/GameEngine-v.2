@@ -8,22 +8,22 @@ import com.badlogic.gdx.physics.box2d.Manifold;
 
 import fr.tommarx.gameengine.Components.BoxBody;
 import fr.tommarx.gameengine.Components.CircleBody;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Game.GameObject;
 
 public class CollisionsManager {
 
     public CollisionsManager (final CollisionsListener collisionsListener) {
         Game.getCurrentScreen().world.setContactListener(new ContactListener() {
             public void beginContact(Contact contact) {
-                GameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
-                GameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
+                AbstractGameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
+                AbstractGameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
                 collisionsListener.collisionEnter(a, b);
             }
 
             public void endContact(Contact contact) {
-                GameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
-                GameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
+                AbstractGameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
+                AbstractGameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
                 collisionsListener.collisionEnd(a, b);
             }
 
@@ -37,8 +37,8 @@ public class CollisionsManager {
         });
     }
 
-    public GameObject getGameObjectByBody (Body body) {
-        for (GameObject go : Game.getCurrentScreen().getGameObjects()) {
+    public AbstractGameObject getGameObjectByBody (Body body) {
+        for (AbstractGameObject go : Game.getCurrentScreen().getGameObjects()) {
             if (go.getComponentByClass("CircleBody") != null) {
                 if (((CircleBody)go.getComponentByClass("CircleBody")).getBody().equals(body)) {
                     return go;

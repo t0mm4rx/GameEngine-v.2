@@ -1,18 +1,39 @@
 package fr.tommarx.gameengine.Components;
 
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Drawable;
-import fr.tommarx.gameengine.Game.GameObject;
 
 public abstract class Component extends Drawable {
 
-   private GameObject go;
+   protected float offsetX, offsetY;
 
-   protected GameObject getGameObject(){
+   private AbstractGameObject go;
+
+   public Component (AbstractGameObject go) {
+      this.go = go;
+      offsetX = 0;
+      offsetY = 0;
+   }
+
+   protected AbstractGameObject getGameObject(){
       return go;
    }
 
    public abstract void update();
 
    public abstract void dispose();
+
+   public void setOffset(float x, float y) {
+      offsetX = x;
+      offsetY = y;
+   }
+
+   public float getOffsetY() {
+      return offsetY;
+   }
+
+   public float getOffsetX() {
+      return offsetX;
+   }
 
 }

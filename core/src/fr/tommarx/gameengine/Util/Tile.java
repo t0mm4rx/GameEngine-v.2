@@ -9,7 +9,7 @@ import java.util.Map;
 import fr.tommarx.gameengine.Components.BoxBody;
 import fr.tommarx.gameengine.Components.SpriteRenderer;
 import fr.tommarx.gameengine.Components.Transform;
-import fr.tommarx.gameengine.Game.EmptyGameObject;
+import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Game;
 
 public class Tile {
@@ -30,7 +30,7 @@ public class Tile {
     }
 
     public void generateGameObject(float x, float y) {
-        EmptyGameObject go = new EmptyGameObject(new Transform(new Vector2(x, y)));
+        GameObject go = new GameObject(new Transform(new Vector2(x, y)));
         go.addComponent(new SpriteRenderer(go, Gdx.files.internal(image)));
         if (isSolid) {
             go.addComponent(new BoxBody(go, width, height, BodyDef.BodyType.StaticBody));

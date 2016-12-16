@@ -5,18 +5,17 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Game.GameObject;
 
 public class BoxRenderer extends Component{
 
     private float width, height, offsetX, offsetY;
     private Color color;
-    private GameObject go;
     private ShapeRenderer shapeRenderer;
 
-    public BoxRenderer(GameObject go, float width, float height, Color color) {
-        this.go = go;
+    public BoxRenderer(AbstractGameObject go, float width, float height, Color color) {
+        super(go);
         this.width = width;
         this.height = height;
         this.color = color;
@@ -33,8 +32,8 @@ public class BoxRenderer extends Component{
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(color);
         shapeRenderer.rect(
-                go.getTransform().getPosition().x - width / 2 + offsetX,
-                go.getTransform().getPosition().y - height / 2 + offsetY,
+                getGameObject().getTransform().getPosition().x - width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y - height / 2 + offsetY,
                 width,
                 height
                 );
@@ -49,8 +48,8 @@ public class BoxRenderer extends Component{
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(color);
         shapeRenderer.rect(
-                go.getTransform().getPosition().x - width / 2,
-                go.getTransform().getPosition().y - height / 2,
+                getGameObject().getTransform().getPosition().x - width / 2,
+                getGameObject().getTransform().getPosition().y - height / 2,
                 width,
                 height
         );

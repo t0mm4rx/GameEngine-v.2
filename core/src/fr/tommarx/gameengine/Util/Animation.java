@@ -3,16 +3,16 @@ package fr.tommarx.gameengine.Util;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import fr.tommarx.gameengine.Game.GameObject;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 
 public class Animation {
 
     com.badlogic.gdx.graphics.g2d.Animation anim;
-    GameObject go;
+    AbstractGameObject go;
     boolean looping;
     private int id;
 
-    public Animation (GameObject go, Texture texture, int cols, int rows, float speed, boolean looping, int id) {
+    public Animation (AbstractGameObject go, Texture texture, int cols, int rows, float speed, boolean looping, int id) {
         this.go = go;
         this.looping = looping;
         this.id = id;

@@ -4,20 +4,19 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
 
-import fr.tommarx.gameengine.Game.GameObject;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Util.Animation;
 
 public class AnimationManager extends Component {
 
-    GameObject go;
     ArrayList<fr.tommarx.gameengine.Util.Animation> anims;
     fr.tommarx.gameengine.Util.Animation currentAnimation;
     boolean isRendering;
     float stateTime;
 
-    public AnimationManager(GameObject go) {
+    public AnimationManager(AbstractGameObject go) {
+        super(go);
         isRendering = false;
-        this.go = go;
         anims = new ArrayList<fr.tommarx.gameengine.Util.Animation>();
         stateTime = 0f;
     }
@@ -44,8 +43,8 @@ public class AnimationManager extends Component {
 
     public void render() {
         if (isRendering) {
-            if (go.getSpriteRenderer() != null) {
-                go.getSpriteRenderer().setTexture(currentAnimation.getAnimation().getKeyFrame(stateTime, currentAnimation.isLooping()));
+            if (getGameObject().getSpriteRenderer() != null) {
+                getGameObject().getSpriteRenderer().setTexture(currentAnimation.getAnimation().getKeyFrame(stateTime, currentAnimation.isLooping()));
             } else {
                 System.err.println("Game object has no sprite renderer !");
             }

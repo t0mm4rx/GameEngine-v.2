@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.util.concurrent.Callable;
 
@@ -23,6 +24,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
     private static Screen screen;
     public static TweenManager tweenManager;
     private static WaitAndDo waitAndDo;
+    public static Vector2 center;
 
     public void create() {
         debugging = false;
@@ -32,6 +34,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
         font = new BitmapFont();
         tweenManager = new TweenManager();
         waitAndDo = new WaitAndDo();
+        center = new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
         init();
     }
 

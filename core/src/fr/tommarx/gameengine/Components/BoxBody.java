@@ -6,18 +6,17 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Util.Math;
 
 public class BoxBody extends Component{
 
-    private GameObject go;
     private com.badlogic.gdx.physics.box2d.Body body;
     private float width, height;
 
-    public BoxBody(GameObject go, BodyDef.BodyType bodyType) {
-        this.go = go;
+    public BoxBody(AbstractGameObject go, BodyDef.BodyType bodyType) {
+        super(go);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
         bodyDef.position.set(go.getTransform().getPosition().x, go.getTransform().getPosition().y);
@@ -31,7 +30,7 @@ public class BoxBody extends Component{
             width = go.getSpriteRenderer().getTexture().getWidth() / 2 * go.getTransform().getScale().x;
             height = go.getSpriteRenderer().getTexture().getHeight() / 2 * go.getTransform().getScale().y;
         } else {
-            System.err.println("Warning ! The given gameobject has no sprite renderer, please use BoxBody(GameObject go, float width, float height, BodyDef.BodyType bodyType) constructor.");
+            System.err.println("Warning ! The given gameobject has no sprite renderer, please use BoxBody(AbstractGameObject go, float width, float height, BodyDef.BodyType bodyType) constructor.");
             shape.setAsBox(10, 10);
             width = 10;
             height = 10;
@@ -44,8 +43,8 @@ public class BoxBody extends Component{
         shape.dispose();
     }
 
-    public BoxBody(GameObject go, float width, float height, BodyDef.BodyType bodyType) {
-        this.go = go;
+    public BoxBody(AbstractGameObject go, float width, float height, BodyDef.BodyType bodyType) {
+        super(go);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
         bodyDef.position.set(go.getTransform().getPosition().x, go.getTransform().getPosition().y);
@@ -60,8 +59,8 @@ public class BoxBody extends Component{
         shape.dispose();
     }
 
-    public BoxBody(GameObject go, float width, float height, BodyDef.BodyType bodyType, boolean isSensor) {
-        this.go = go;
+    public BoxBody(AbstractGameObject go, float width, float height, BodyDef.BodyType bodyType, boolean isSensor) {
+        super(go);
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = bodyType;
         bodyDef.position.set(go.getTransform().getPosition().x, go.getTransform().getPosition().y);
@@ -88,8 +87,8 @@ public class BoxBody extends Component{
     }
 
     public void update() {
-        go.getTransform().setPosition(body.getPosition());
-        go.getTransform().setRotation(Math.RadianToDegree(body.getAngle()));
+        getGameObject().getTransform().setPosition(body.getPosition());
+        getGameObject().getTransform().setRotation(Math.RadianToDegree(body.getAngle()));
     }
 
     public void dispose() {

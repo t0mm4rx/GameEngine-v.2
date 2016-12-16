@@ -7,20 +7,19 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Game.GameObject;
 
 public class Text extends Component {
 
     String text;
     BitmapFont font;
-    GameObject go;
     GlyphLayout glyphLayout;
     Color color;
     int offsetX, offsetY;
 
-    public Text(GameObject go, String text, Color color) {
-        this.go = go;
+    public Text(AbstractGameObject go, String text, Color color) {
+        super(go);
         this.text = text;
         font = new BitmapFont();
         glyphLayout = new GlyphLayout();
@@ -29,8 +28,8 @@ public class Text extends Component {
         offsetY = 0;
     }
 
-    public Text(GameObject go, FileHandle fontFile, int size, String text, Color color) {
-        this.go = go;
+    public Text(AbstractGameObject go, FileHandle fontFile, int size, String text, Color color) {
+        super(go);
         this.text = text;
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(fontFile);
         FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
@@ -44,23 +43,23 @@ public class Text extends Component {
 
     public void render() {
         glyphLayout.setText(font, text);
-        font.getData().setScale(go.getTransform().getScale().x, go.getTransform().getScale().y);
+        font.getData().setScale(getGameObject().getTransform().getScale().x, getGameObject().getTransform().getScale().y);
         font.setColor(color);
         font.draw(Game.batch,
                 text,
-                go.getTransform().getPosition().x - glyphLayout.width / 2 + offsetX,
-                go.getTransform().getPosition().y - glyphLayout.height / 2 + offsetY
+                getGameObject().getTransform().getPosition().x - glyphLayout.width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y - glyphLayout.height / 2 + offsetY
         );
     }
 
     public void renderInHUD() {
         glyphLayout.setText(font, text);
-        font.getData().setScale(go.getTransform().getScale().x, go.getTransform().getScale().y);
+        font.getData().setScale(getGameObject().getTransform().getScale().x, getGameObject().getTransform().getScale().y);
         font.setColor(color);
         font.draw(Game.HUDbatch,
                 text,
-                go.getTransform().getPosition().x - glyphLayout.width / 2 + offsetX,
-                go.getTransform().getPosition().y - glyphLayout.height / 2 + offsetY
+                getGameObject().getTransform().getPosition().x - glyphLayout.width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y - glyphLayout.height / 2 + offsetY
         );
     }
 

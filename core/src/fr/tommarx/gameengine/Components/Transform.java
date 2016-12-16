@@ -8,18 +8,21 @@ public class Transform extends Component {
     private float rotation;
 
     public Transform (Vector2 position, Vector2 scale, float rotation) {
+        super(null);
         this.position = position;
         this.scale = scale;
         this.rotation = rotation;
     }
 
     public Transform (Vector2 position) {
+        super(null);
         this.position = position;
         this.scale = new Vector2(1, 1);
         this.rotation = 0;
     }
 
     public Transform () {
+        super(null);
         this.position = new Vector2(0, 0);
         this.scale = new Vector2(1, 1);
         this.rotation = 0;

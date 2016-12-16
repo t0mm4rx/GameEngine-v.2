@@ -18,22 +18,18 @@ public class CollisionsManager {
             public void beginContact(Contact contact) {
                 AbstractGameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
                 AbstractGameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
-                collisionsListener.collisionEnter(a, b);
+                collisionsListener.collisionEnter(a, b, contact);
             }
 
             public void endContact(Contact contact) {
                 AbstractGameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
                 AbstractGameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
-                collisionsListener.collisionEnd(a, b);
+                collisionsListener.collisionEnd(a, b, contact);
             }
 
-            public void preSolve(Contact contact, Manifold oldManifold) {
+            public void preSolve(Contact contact, Manifold oldManifold) {}
 
-            }
-
-            public void postSolve(Contact contact, ContactImpulse impulse) {
-
-            }
+            public void postSolve(Contact contact, ContactImpulse impulse) {}
         });
     }
 

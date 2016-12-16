@@ -10,10 +10,7 @@ import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Util.Math;
 
-public class BoxBody extends Component{
-
-    private com.badlogic.gdx.physics.box2d.Body body;
-    private float width, height;
+public class BoxBody extends Body{
 
     public BoxBody(AbstractGameObject go, BodyDef.BodyType bodyType) {
         super(go);

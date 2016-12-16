@@ -13,23 +13,22 @@ public class Body extends Component {
 
     com.badlogic.gdx.physics.box2d.Body body;
 
-    public Body(AbstractGameObject go, BodyDef.BodyType type, FixtureDef def) {
+    public Body(AbstractGameObject go) {
         super(go);
+    }
+
+    protected void initBody(BodyDef.BodyType type, FixtureDef def) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = type;
-        bodyDef.position.set(go.getTransform().getPosition().x + offsetX, go.getTransform().getPosition().y + offsetY);
-        bodyDef.angle = Math.DegreeToRadian(go.getTransform().getRotation());
+        bodyDef.position.set(getGameObject().getTransform().getPosition().x + offsetX, getGameObject().getTransform().getPosition().y + offsetY);
+        bodyDef.angle = Math.DegreeToRadian(getGameObject().getTransform().getRotation());
         body = Game.getCurrentScreen().world.createBody(bodyDef);
         body.createFixture(def);
     }
 
-    public void render() {
+    public void render() {}
 
-    }
-
-    public void renderInHUD() {
-
-    }
+    public void renderInHUD() {}
 
     public void update() {
         getGameObject().getTransform().setPosition(new Vector2(body.getPosition().x + offsetX, body.getPosition().y + offsetY));

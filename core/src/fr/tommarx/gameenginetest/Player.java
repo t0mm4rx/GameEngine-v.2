@@ -18,7 +18,7 @@ public class Player extends AbstractGameObject {
     public Player(Transform transform) {
         super(new Transform(transform.getPosition(), new Vector2(.2f, .2f), 0));
         addComponent(new SpriteRenderer(this, Gdx.files.internal("badlogic.jpg")));
-        addComponent(new BoxBody(this, 256, 256, BodyDef.BodyType.DynamicBody));
+        addComponent(new BoxBody(this, 256, 256, BodyDef.BodyType.DynamicBody, false));
     }
 
     protected void update(float delta) {

@@ -13,7 +13,7 @@ public class Wall extends AbstractGameObject{
     public Wall(Transform transform, float width, float height) {
         super(transform);
         addComponent(new BoxRenderer(this, width, height, Color.BLACK));
-        addComponent(new BoxBody(this, width, height, BodyDef.BodyType.StaticBody));
+        addComponent(new BoxBody(this, width, height, BodyDef.BodyType.StaticBody, false));
     }
 
     protected void update(float delta) {

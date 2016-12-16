@@ -36,6 +36,10 @@ public class TestScreen extends Screen{
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             Game.debugging = !Game.debugging;
         }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.F)) {
+            fadeOut(1);
+        }
     }
 
 }

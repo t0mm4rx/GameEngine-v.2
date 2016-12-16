@@ -24,9 +24,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
     public static TweenManager tweenManager;
     private static WaitAndDo waitAndDo;
 
-    public Game() {}
-
-    protected void init() {
+    public void create() {
         debugging = false;
         debugInfos = new String[10];
         batch = new SpriteBatch();
@@ -34,7 +32,10 @@ public abstract class Game extends com.badlogic.gdx.Game {
         font = new BitmapFont();
         tweenManager = new TweenManager();
         waitAndDo = new WaitAndDo();
+        init();
     }
+
+    public abstract void init();
 
     public void render() {
         tweenManager.update();
@@ -53,7 +54,9 @@ public abstract class Game extends com.badlogic.gdx.Game {
                 }
             }
         }
-        screen.renderHUD();
+        if (screen != null) {
+            screen.renderHUD();
+        }
         HUDbatch.end();
 
         debugInfos = new String[10];

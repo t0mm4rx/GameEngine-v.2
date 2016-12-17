@@ -22,6 +22,7 @@ public class Body extends Component {
         bodyDef.type = type;
         bodyDef.position.set(getGameObject().getTransform().getPosition().x + offsetX, getGameObject().getTransform().getPosition().y + offsetY);
         bodyDef.angle = Math.DegreeToRadian(getGameObject().getTransform().getRotation());
+        bodyDef.linearDamping = 3f;
         body = Game.getCurrentScreen().world.createBody(bodyDef);
         body.createFixture(def);
     }

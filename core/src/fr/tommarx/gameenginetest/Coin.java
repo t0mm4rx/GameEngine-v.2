@@ -13,7 +13,7 @@ public class Coin extends AbstractGameObject{
     public Coin(Transform transform) {
         super(transform);
         addComponent(new BoxRenderer(this, 16, 16, Color.YELLOW));
-        addComponent(new CircleBody(this, 8, BodyDef.BodyType.DynamicBody, false));
+        addComponent(new CircleBody(this, 8, BodyDef.BodyType.KinematicBody, false));
     }
 
     protected void update(float delta) {

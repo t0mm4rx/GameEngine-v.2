@@ -5,9 +5,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Contact;
 
+import fr.tommarx.gameengine.Collisions.CollisionsListener;
+import fr.tommarx.gameengine.Collisions.CollisionsManager;
 import fr.tommarx.gameengine.Components.BoxRenderer;
 import fr.tommarx.gameengine.Components.Transform;
+import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
@@ -21,8 +25,7 @@ public class TestScreen extends Screen{
     }
 
     public void show() {
-
-        fadeIn(1);
+        world.setGravity(new Vector2(0, -200));
 
         GameObject background = new GameObject(new Transform(Game.center));
         background.addComponent(new BoxRenderer(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Color.LIGHT_GRAY));
@@ -42,6 +45,7 @@ public class TestScreen extends Screen{
             }
         });
 
+        fadeIn(1);
     }
 
     public void update() {

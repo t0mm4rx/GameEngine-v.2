@@ -1,6 +1,7 @@
 package fr.tommarx.gameengine.Components;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public class AnimationManager extends Component {
     public void render() {
         if (isRendering) {
             if (getGameObject().getSpriteRenderer() != null) {
-                getGameObject().getSpriteRenderer().setTexture(currentAnimation.getAnimation().getKeyFrame(stateTime, currentAnimation.isLooping()));
+                getGameObject().getSpriteRenderer().setTexture((TextureRegion) currentAnimation.getAnimation().getKeyFrame(stateTime, currentAnimation.isLooping()));
             } else {
                 System.err.println("Game object has no sprite renderer !");
             }

@@ -10,12 +10,12 @@ import fr.tommarx.gameengine.Components.BoxBody;
 import fr.tommarx.gameengine.Components.SpriteRenderer;
 import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.AbstractGameObject;
+import fr.tommarx.gameengine.Game.Game;
 
 public class Player extends AbstractGameObject {
 
     Body body;
-    final float ACCELERATION = 30, MAX_SPEED = 300, JUMP = 70;
-    private boolean grounded, jumping;
+    final float ACCELERATION = 30, JUMP = 70;
 
     public Player(Transform transform) {
         super(new Transform(transform.getPosition(), new Vector2(.2f, .2f), 0));
@@ -23,37 +23,25 @@ public class Player extends AbstractGameObject {
         body = new BoxBody(this, 256, 256, BodyDef.BodyType.DynamicBody, false);
         setTag("Player");
         addComponent(body);
-        grounded = false;
-        jumping = false;
     }
 
     protected void update(float delta) {
 
-        if (!grounded) {
-            if (body.getBody().getLinearVelocity().y < 0) {
-                jumping = false;
-            }
-            if (body.getBody().getLinearVelocity().y == 0 && jumping == false) {
-                grounded = true;
-            }
-        }
-
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            if (body.getBody().getLinearVelocity().x > -MAX_SPEED) {
-                body.getBody().setLinearVelocity(new Vector2(body.getBody().getLinearVelocity().x - ACCELERATION, body.getBody().getLinearVelocity().y));
-            }
+            body.getBody().applyForceToCenter(new Vector2(-ACCELERATION * 100000, 0), false);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (body.getBody().getLinearVelocity().x < MAX_SPEED) {
-                body.getBody().setLinearVelocity(new Vector2(body.getBody().getLinearVelocity().x + ACCELERATION, body.getBody().getLinearVelocity().y));
-            }
+            body.getBody().applyForceToCenter(new Vector2(ACCELERATION * 100000, 0), false);
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            if (grounded) {
-                grounded = false;
-                jumping = true;
-                body.getBody().setLinearVelocity(new Vector2(body.getBody().getLinearVelocity().x, body.getBody().getLinearVelocity().y - JUMP));
-            }
+            body.getBody().applyForceToCenter(new Vector2(0, JUMP * 100000), false);
         }
+
+        if (getTransform().getPosition().y < Game.center.y) {
+            Game.getCurrentScreen().camera.position.set(getTransform().getPosition().x, Game.getCurrentScreen().camera.position.y, 0);
+        } else {
+            Game.getCurrentScreen().camera.position.set(getTransform().getPosition().x, getTransform().getPosition().y, 0);
+        }
+
     }
 }

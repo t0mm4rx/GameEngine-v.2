@@ -24,7 +24,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     protected ArrayList<Drawable> drawablesHUD;
     public ArrayList<Drawable> toDelete;
     public OrthographicCamera camera;
-    protected Game game;
+    public Game game;
     private RayHandler rayHandler;
     public World world;
     private Box2DDebugRenderer colliderRenderer;
@@ -40,7 +40,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         drawables = new ArrayList<Drawable>();
         drawablesHUD = new ArrayList<Drawable>();
         toDelete = new ArrayList<Drawable>();
-        world = new World(new Vector2(0, -98f), true);
+        world = new World(new Vector2(0, -9.8f), true);
         colliderRenderer = new Box2DDebugRenderer();
         rayHandler = new RayHandler(world);
         rayHandler.setCombinedMatrix(camera);
@@ -48,9 +48,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         lightsEnabled = false;
         lastCamPosition = new Vector2();
         overlay = new GameObject(new Transform(Game.center));
-        overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth() + 500, Gdx.graphics.getHeight() + 500, Color.BLACK));
+        overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new Color(0f, 0f, 0f, 0f)));
         overlay.setLayout(1000);
-        add(overlay);
+        addInHUD(overlay);
         id = UUID.randomUUID().toString();
     }
 
@@ -176,7 +176,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     }
 
     public void render (float delta) {
-        world.step(Gdx.graphics.getDeltaTime(), 6, 2);
+        world.step(1/45f, 6, 2);
         camera.update();
         Game.batch.setProjectionMatrix(camera.combined);
 
@@ -201,7 +201,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         }
 
         if (Game.debugging) {
-            colliderRenderer.render(world, Game.batch.getProjectionMatrix().cpy());
+            colliderRenderer.render(world, Game.batch.getProjectionMatrix().cpy().scale(100, 100, 0));
         }
 
         for (Drawable d : toDelete) {

@@ -11,7 +11,7 @@ public class CircleBody extends Body{
     public CircleBody(AbstractGameObject go, float radius, BodyDef.BodyType bodyType, boolean isSensor) {
         super(go);
         CircleShape shape = new CircleShape();
-        shape.setRadius(radius);
+        shape.setRadius(radius / 100);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;

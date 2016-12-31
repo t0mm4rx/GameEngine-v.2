@@ -25,11 +25,9 @@ public class TestScreen extends Screen{
     }
 
     public void show() {
-        world.setGravity(new Vector2(0, -200));
-
-        GameObject background = new GameObject(new Transform(Game.center));
-        background.addComponent(new BoxRenderer(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), Color.LIGHT_GRAY));
-        background.setScrollingSpeed(0);
+        GameObject background = new GameObject(new Transform(new Vector2(0, Game.center.y)));
+        background.addComponent(new BoxRenderer(background, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() * 10, Color.LIGHT_GRAY));
+        background.setScrollingSpeed(1);
         add(background);
 
         add(new Player(new Transform(Game.center)));
@@ -49,6 +47,7 @@ public class TestScreen extends Screen{
     }
 
     public void update() {
+        Game.debug(1, Gdx.graphics.getFramesPerSecond() + "");
         if (Gdx.input.isKeyJustPressed(Input.Keys.D)) {
             Game.debugging = !Game.debugging;
         }

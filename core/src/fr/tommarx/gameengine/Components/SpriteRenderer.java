@@ -13,12 +13,15 @@ public class SpriteRenderer extends Component {
     private TextureRegion texture;
     private float width;
     private float height;
+    private boolean flippedX, flippedY;
 
     public SpriteRenderer (AbstractGameObject go, FileHandle texture) {
         super(go);
         this.texture = new TextureRegion(new Texture(texture));
         width = getTexture().getWidth();
         height = getTexture().getHeight();
+        flippedX = false;
+        flippedY = false;
     }
 
     public SpriteRenderer (AbstractGameObject go, FileHandle texture, float offsetX, float offsetY) {
@@ -26,6 +29,8 @@ public class SpriteRenderer extends Component {
         this.texture = new TextureRegion(new Texture(texture));
         width = getTexture().getWidth();
         height = getTexture().getHeight();
+        flippedX = false;
+        flippedY = false;
         this.offsetX = offsetX;
         this.offsetY = offsetY;
     }
@@ -82,7 +87,12 @@ public class SpriteRenderer extends Component {
     }
 
     public void flip(boolean x, boolean y) {
-        texture.flip(x, y);
+        if ((!texture.isFlipX() && x) || (texture.isFlipX() && !x)) {
+            texture.flip(true, texture.isFlipY());
+        }
+        if ((!texture.isFlipY() && y) || (texture.isFlipY() && !y)) {
+            texture.flip(texture.isFlipX(), true);
+        }
     }
 
     public void update() {

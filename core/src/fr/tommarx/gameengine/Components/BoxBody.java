@@ -11,7 +11,7 @@ public class BoxBody extends Body {
     public BoxBody(AbstractGameObject go, float width, float height, BodyDef.BodyType bodyType, boolean isSensor) {
         super(go);
         PolygonShape shape = new PolygonShape();
-        shape.setAsBox(width / 2 * go.getTransform().getScale().x, height / 2* go.getTransform().getScale().y);
+        shape.setAsBox((width / 2 * go.getTransform().getScale().x) / 100, (height / 2* go.getTransform().getScale().y) / 100);
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = shape;
         fixtureDef.density = 1f;

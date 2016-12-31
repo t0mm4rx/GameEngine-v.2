@@ -20,7 +20,7 @@ public class Body extends Component {
     protected void initBody(BodyDef.BodyType type, FixtureDef def) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = type;
-        bodyDef.position.set(getGameObject().getTransform().getPosition().x + offsetX, getGameObject().getTransform().getPosition().y + offsetY);
+        bodyDef.position.set((getGameObject().getTransform().getPosition().x + offsetX) / 100, (getGameObject().getTransform().getPosition().y + offsetY) / 100);
         bodyDef.angle = Math.DegreeToRadian(getGameObject().getTransform().getRotation());
         bodyDef.linearDamping = 3f;
         body = Game.getCurrentScreen().world.createBody(bodyDef);
@@ -32,7 +32,7 @@ public class Body extends Component {
     public void renderInHUD() {}
 
     public void update() {
-        getGameObject().getTransform().setPosition(new Vector2(body.getPosition().x + offsetX, body.getPosition().y + offsetY));
+        getGameObject().getTransform().setPosition(new Vector2(body.getPosition().x * 100 + offsetX, body.getPosition().y * 100 + offsetY));
         getGameObject().getTransform().setRotation(Math.RadianToDegree(body.getAngle()));
     }
 

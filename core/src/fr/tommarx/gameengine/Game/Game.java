@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Box2D;
 
 import java.util.concurrent.Callable;
 
@@ -27,6 +28,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
     public static Vector2 center;
 
     public void create() {
+        Box2D.init();
         debugging = false;
         debugInfos = new String[10];
         batch = new SpriteBatch();
@@ -68,6 +70,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
 
     protected void stop() {
         batch.dispose();
+        HUDbatch.dispose();
     }
 
 

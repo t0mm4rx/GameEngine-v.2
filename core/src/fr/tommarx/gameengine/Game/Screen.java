@@ -35,8 +35,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     public Screen (Game game) {
         this.game = game;
-        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        camera.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        camera = new OrthographicCamera(Gdx.graphics.getWidth() / 100, Gdx.graphics.getHeight() / 100);
+        camera.position.set(Game.center.x, Game.center.y, 0);
         drawables = new ArrayList<Drawable>();
         drawablesHUD = new ArrayList<Drawable>();
         toDelete = new ArrayList<Drawable>();

@@ -36,7 +36,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
         font = new BitmapFont();
         tweenManager = new TweenManager();
         waitAndDo = new WaitAndDo();
-        center = new Vector2(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        center = new Vector2(Gdx.graphics.getWidth() / 2 / 100, Gdx.graphics.getHeight() / 2 / 100);
         init();
     }
 

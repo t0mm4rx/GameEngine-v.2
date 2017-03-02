@@ -18,8 +18,8 @@ public class SpriteRenderer extends Component {
     public SpriteRenderer (AbstractGameObject go, FileHandle texture) {
         super(go);
         this.texture = new TextureRegion(new Texture(texture));
-        width = getTexture().getWidth();
-        height = getTexture().getHeight();
+        width = getTexture().getWidth() / 100;
+        height = getTexture().getHeight() / 100;
         flippedX = false;
         flippedY = false;
     }
@@ -27,8 +27,8 @@ public class SpriteRenderer extends Component {
     public SpriteRenderer (AbstractGameObject go, FileHandle texture, float offsetX, float offsetY) {
         super(go);
         this.texture = new TextureRegion(new Texture(texture));
-        width = getTexture().getWidth();
-        height = getTexture().getHeight();
+        width = getTexture().getWidth() / 100;
+        height = getTexture().getHeight() / 100;
         flippedX = false;
         flippedY = false;
         this.offsetX = offsetX;

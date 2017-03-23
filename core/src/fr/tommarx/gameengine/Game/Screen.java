@@ -7,8 +7,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.utils.Array;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -315,6 +317,12 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
                 ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, 1));
             }
         });
+    }
+
+    public Array<Body> getBodies() {
+        Array<com.badlogic.gdx.physics.box2d.Body> bodies = new Array<>();
+        Game.getCurrentScreen().world.getBodies(bodies);
+        return bodies;
     }
 
 

@@ -148,9 +148,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         game.setScreen(screen);
     }
 
-    public void add(Drawable go) {
-        this.drawables.add(go);
-    }
+    public void add(Drawable go) { this.drawables.add(go); }
 
     public void addInHUD(Drawable go) {
         this.drawablesHUD.add(go);

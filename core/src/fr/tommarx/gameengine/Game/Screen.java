@@ -17,6 +17,7 @@ import box2dLight.RayHandler;
 import fr.tommarx.gameengine.Components.BoxRenderer;
 import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Easing.Tween;
+import fr.tommarx.gameengine.Easing.TweenListener;
 import fr.tommarx.gameengine.UI.UICanvas;
 import fr.tommarx.gameengine.Util.LayoutSorter;
 
@@ -232,8 +233,6 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         }
         toDelete.removeAll(toDelete2);
 
-        ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, Game.tweenManager.getValue("Fade:" + id)));
-
         update();
 
     }
@@ -297,11 +296,25 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     }
 
     public void fadeIn(float time) {
-        Game.tweenManager.goTween(new Tween("Fade:" + id, Tween.LINEAR_EASE_NONE, 1f, -1f, time, 0f, false));
+        new Tween(Tween.LINEAR_EASE_NONE, time, 0, false, new TweenListener() {
+            public void onValueChanged(float v) {
+                ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, 1 - v));
+            }
+            public void onFinished() {
+                ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, 0));
+            }
+        });
     }
 
     public void fadeOut(float time) {
-        Game.tweenManager.goTween(new Tween("Fade:" + id, Tween.LINEAR_EASE_NONE, 0f, 1f, time, 0f, false));
+        new Tween(Tween.LINEAR_EASE_NONE, time, 0, false, new TweenListener() {
+            public void onValueChanged(float v) {
+                ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, v));
+            }
+            public void onFinished() {
+                ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, 1));
+            }
+        });
     }
 
 

@@ -1,44 +1,17 @@
 package fr.tommarx.gameengine.Easing;
 
-import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 
 public class TweenManager {
 
     ArrayList<Tween> tweens;
-    ArrayList<Tween> deadTweens;
 
     public TweenManager () {
         tweens = new ArrayList<Tween>();
-        deadTweens = new ArrayList<Tween>();
     }
 
-    public void goTween(Tween tween) {
-        ArrayList<Tween> toDelete = new ArrayList<Tween>();
-        for (Tween t : deadTweens) {
-            if (t.getName().equals(tween.getName())) {
-                toDelete.add(t);
-            }
-        }
-        deadTweens.removeAll(toDelete);
+    public void addTween(Tween tween) {
         tweens.add(tween);
-    }
-
-    public float getValue(String name) {
-        for (Tween t : tweens) {
-            if (t.getName().equals(name)) {
-                return t.getValue();
-            }
-        }
-        for (Tween t : deadTweens) {
-            if (t.getName().equals(name)) {
-                return t.getValue();
-            }
-        }
-
-        //System.err.println("No tween found with the name : " + name);
-        return 0;
     }
 
     public void update() {
@@ -50,7 +23,6 @@ public class TweenManager {
             tween.update();
         }
         tweens.removeAll(toDelete);
-        deadTweens.addAll(toDelete);
     }
 
 }

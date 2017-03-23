@@ -21,27 +21,20 @@ public class Tween {
     private int easingType;
     private double timeB;
     private boolean isFinished, repeat;
-    private String name;
+    private TweenListener listener;
 
-    public Tween(String name, int easingType, float from, float change, float duration, float delay, boolean repeat) {
-        this.name = name;
+    public Tween(int easingType, float duration, float delay, boolean repeat, TweenListener listener) {
         this.duration = duration;
         this.delay = delay;
-        this.from = from;
-        this.change = change;
+        this.from = 0;
+        this.change = 1;
         this.easingType = easingType;
         value = from;
         timeB = System.currentTimeMillis();
         isFinished = false;
         this.repeat = repeat;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public float getValue() {
-        return value;
+        this.listener = listener;
+        Game.tweenManager.addTween(this);
     }
 
     public boolean isFinished() {
@@ -95,6 +88,7 @@ public class Tween {
 
             if (!repeat) {
                 isFinished = true;
+                listener.onFinished();
             } else {
                 time = 0;
                 if (value > .9f) {
@@ -104,6 +98,9 @@ public class Tween {
                 }
                 change = -change;
             }
+        } else {
+            listener.onValueChanged(value);
+            System.out.println(value);
         }
     }
 

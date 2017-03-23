@@ -59,6 +59,12 @@ public class TestScreen extends Screen{
         if (input.isKeyJustPressed(Input.Keys.NUM_7)) {
             camera.zoom += 0.1f;
         }
+        if (Keys.isKeyJustPressed(Input.Keys.NUM_1)) {
+            fadeIn(1f);
+        }
+        if (input.isKeyJustPressed(Input.Keys.NUM_2)) {
+            fadeOut(1f);
+        }
     }
 
 }

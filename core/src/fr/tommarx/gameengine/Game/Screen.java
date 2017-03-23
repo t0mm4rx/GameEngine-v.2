@@ -3,7 +3,9 @@ package fr.tommarx.gameengine.Game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -26,6 +28,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public OrthographicCamera camera;
     public Game game;
     private RayHandler rayHandler;
+    public ShapeRenderer shapeRenderer;
     public World world;
     private Box2DDebugRenderer colliderRenderer;
     private boolean lightsEnabled;
@@ -42,13 +45,14 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         toDelete = new ArrayList<Drawable>();
         world = new World(new Vector2(0, -9.8f), true);
         colliderRenderer = new Box2DDebugRenderer();
+        shapeRenderer = new ShapeRenderer();
         rayHandler = new RayHandler(world);
         rayHandler.setCombinedMatrix(camera);
         rayHandler.setBlur(true);
         lightsEnabled = false;
         lastCamPosition = new Vector2();
         overlay = new GameObject(new Transform(Game.center));
-        overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new Color(0f, 0f, 0f, 0f)));
+        overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * 2, new Color(0f, 0f, 0f, 0f)));
         overlay.setLayout(1000);
         addInHUD(overlay);
         id = UUID.randomUUID().toString();
@@ -156,29 +160,30 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         toDelete.add(go);
     }
 
-    public void kill(Drawable go) {
-        ArrayList<Drawable> toDelete = new ArrayList<Drawable>();
+    private void kill(Drawable go) {
+        ArrayList<Drawable> _toDelete = new ArrayList<>();
         for (Drawable d : drawables) {
             if (d.equals(go)) {
-                toDelete.add(d);
+                _toDelete.add(d);
             }
         }
         for (Drawable d : drawablesHUD) {
             if (d.equals(go)) {
-                toDelete.add(d);
+                _toDelete.add(d);
             }
         }
-        for (Drawable d : toDelete) {
+        drawables.removeAll(_toDelete);
+        drawablesHUD.removeAll(_toDelete);
+        for (Drawable d : _toDelete) {
             d.dispose();
         }
-        drawables.removeAll(toDelete);
-        drawablesHUD.removeAll(toDelete);
     }
 
     public void render (float delta) {
         world.step(1/45f, 6, 2);
         camera.update();
         Game.batch.setProjectionMatrix(camera.combined);
+        shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
 
         Vector2 cam_move = new Vector2(camera.position.x - lastCamPosition.x, camera.position.y - lastCamPosition.y);
         for (Drawable d : drawables) {
@@ -201,12 +206,33 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         }
 
         if (Game.debugging) {
-            colliderRenderer.render(world, Game.batch.getProjectionMatrix().cpy().scale(100, 100, 0));
+            //Draw gride
+            Game.batch.end();
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
+            Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+            Vector2 a = new Vector2(camera.position.x - Gdx.graphics.getWidth() / 100 / 2 - 1, camera.position.y - Gdx.graphics.getHeight() / 100 / 2 - 1);
+            for (float x = ((float)Math.ceil(a.x)); x < Gdx.graphics.getWidth() / 100 + a.x + 1; x += 1) {
+                Game.getCurrentScreen().shapeRenderer.setColor(new Color(255, 255, 255, 0.2f));
+                Game.getCurrentScreen().shapeRenderer.line(x, ((float)Math.ceil(a.y)) - 1, x, Gdx.graphics.getHeight() / 100 + a.y + 1);
+            }
+            for (float y = ((float)Math.ceil(a.y)) - 1; y < Gdx.graphics.getHeight() / 100 + a.y + 1; y += 1) {
+                Game.getCurrentScreen().shapeRenderer.setColor(new Color(255, 255, 255, 0.2f));
+                Game.getCurrentScreen().shapeRenderer.line(((float)Math.ceil(a.x)), y, Gdx.graphics.getWidth() / 100 + a.x + 1, y);
+            }
+            Game.getCurrentScreen().shapeRenderer.end();
+            Gdx.gl.glDisable(GL20.GL_BLEND);
+            Game.batch.begin();
+            colliderRenderer.render(world, Game.batch.getProjectionMatrix().cpy().scale(1, 1, 0));
         }
 
+        ArrayList<Drawable> toDelete2 = new ArrayList<>();
         for (Drawable d : toDelete) {
             kill(d);
+            toDelete2.add(d);
         }
+        toDelete.removeAll(toDelete2);
 
         ((BoxRenderer) overlay.getComponentByClass("BoxRenderer")).setColor(new Color(0, 0, 0, Game.tweenManager.getValue("Fade:" + id)));
 

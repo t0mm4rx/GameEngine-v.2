@@ -12,7 +12,6 @@ public class BoxRenderer extends Component{
 
     private float width, height, offsetX, offsetY;
     private Color color;
-    private ShapeRenderer shapeRenderer;
 
     public BoxRenderer(AbstractGameObject go, float width, float height, Color color) {
         super(go);
@@ -21,41 +20,40 @@ public class BoxRenderer extends Component{
         this.color = color;
         offsetX = 0;
         offsetY = 0;
-        shapeRenderer = new ShapeRenderer();
     }
 
     public void render() {
         Game.batch.end();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(color);
-        shapeRenderer.rect(
+        Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
+        Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        Game.getCurrentScreen().shapeRenderer.setColor(color);
+        Game.getCurrentScreen().shapeRenderer.rect(
                 getGameObject().getTransform().getPosition().x - width / 2 + offsetX,
                 getGameObject().getTransform().getPosition().y - height / 2 + offsetY,
                 width,
                 height
                 );
-        shapeRenderer.end();
+        Game.getCurrentScreen().shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
         Game.batch.begin();
     }
 
     public void renderInHUD() {
-        shapeRenderer.setProjectionMatrix(Game.HUDbatch.getProjectionMatrix());
+        Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.HUDbatch.getProjectionMatrix());
         Game.HUDbatch.end();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.setColor(color);
-        shapeRenderer.rect(
+        Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        Game.getCurrentScreen().shapeRenderer.setColor(color);
+        Game.getCurrentScreen().shapeRenderer.rect(
                 getGameObject().getTransform().getPosition().x - width / 2,
                 getGameObject().getTransform().getPosition().y - height / 2,
                 width,
                 height
         );
-        shapeRenderer.end();
+        Game.getCurrentScreen().shapeRenderer.end();
         Game.HUDbatch.begin();
     }
 
@@ -91,7 +89,5 @@ public class BoxRenderer extends Component{
 
     }
 
-    public void dispose() {
-        shapeRenderer.dispose();
-    }
+    public void dispose() {}
 }

@@ -18,7 +18,7 @@ public class MapReader {
                 for (int y = 0; y < image.getHeight(); y++) {
                     Color c = new Color(image.getRGB(x, y), true);
                     if (c.getAlpha() != 0) {
-                        mapInterface.onPixel(new com.badlogic.gdx.graphics.Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha()), x * tileSize, (image.getHeight() - y) * tileSize);
+                        mapInterface.onPixel(new com.badlogic.gdx.graphics.Color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha()), x * tileSize / 100, (image.getHeight() - y) * tileSize / 100);
                     }
                 }
             }

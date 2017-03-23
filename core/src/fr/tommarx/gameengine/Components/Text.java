@@ -47,8 +47,8 @@ public class Text extends Component {
         font.setColor(color);
         font.draw(Game.batch,
                 text,
-                getGameObject().getTransform().getPosition().x - glyphLayout.width / 2 + offsetX,
-                getGameObject().getTransform().getPosition().y - glyphLayout.height / 2 + offsetY
+                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 + offsetY
         );
     }
 
@@ -58,8 +58,8 @@ public class Text extends Component {
         font.setColor(color);
         font.draw(Game.HUDbatch,
                 text,
-                getGameObject().getTransform().getPosition().x - glyphLayout.width / 2 + offsetX,
-                getGameObject().getTransform().getPosition().y - glyphLayout.height / 2 + offsetY
+                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 + offsetX,
+                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 + offsetY
         );
     }
 

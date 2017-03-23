@@ -11,6 +11,7 @@ import com.badlogic.gdx.physics.box2d.Box2D;
 import java.util.concurrent.Callable;
 
 import fr.tommarx.gameengine.Easing.TweenManager;
+import fr.tommarx.gameengine.Util.Keys;
 import fr.tommarx.gameengine.Util.WaitAndDo;
 
 
@@ -38,6 +39,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
         waitAndDo = new WaitAndDo();
         center = new Vector2(Gdx.graphics.getWidth() / 2 / 100, Gdx.graphics.getHeight() / 2 / 100);
         init();
+        Keys.init();
     }
 
     public abstract void init();
@@ -65,6 +67,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
         HUDbatch.end();
 
         debugInfos = new String[10];
+        Keys.handleInputs();
 
     }
 

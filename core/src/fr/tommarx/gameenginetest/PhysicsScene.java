@@ -8,8 +8,6 @@ import com.badlogic.gdx.physics.box2d.joints.DistanceJoint;
 import com.badlogic.gdx.physics.box2d.joints.DistanceJointDef;
 import com.badlogic.gdx.utils.Array;
 
-import java.util.ArrayList;
-
 import fr.tommarx.gameengine.Components.Body;
 import fr.tommarx.gameengine.Components.BoxBody;
 import fr.tommarx.gameengine.Components.CircleBody;
@@ -17,8 +15,8 @@ import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
+import fr.tommarx.gameengine.Util.Gamepad;
 import fr.tommarx.gameengine.Util.Keys;
-import fr.tommarx.gameengine.Util.Math;
 
 public class PhysicsScene extends Screen {
 
@@ -51,10 +49,7 @@ public class PhysicsScene extends Screen {
         add(go1);
 
 
-        for (float i = 0; i < 10; i += 0.5f) {
-
-
-        }
+        Gamepad.getGamepads();
     }
 
     public void update() {

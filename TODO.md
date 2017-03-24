@@ -11,5 +11,5 @@
 - [x] Random
 - [x] Game object direction et isMoving
 - [x] Tweening --> event based
-- [ ] Join Box2D
+- [x] Join Box2D
 - [ ] Keys --> Gamepad

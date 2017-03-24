@@ -76,6 +76,13 @@ public class PhysicsScene extends Screen {
         if (Keys.isKeyPressed(Input.Keys.DOWN)) {
             a.getBody().setTransform(a.getBody().getPosition().x, a.getBody().getPosition().y - speed, 0);
         }
+        if (Keys.isKeyPressed(Input.Keys.PLUS)) {
+            camera.zoom -= 0.1f;
+        }
+        if (Keys.isKeyPressed(Input.Keys.MINUS)) {
+            camera.zoom += 0.1f;
+        }
+        Game.debug(3, "isPressed : " + Keys.isKeyPressed(Input.Keys.MINUS));
         if (Keys.isKeyJustPressed(Input.Keys.E)) {
             Array<com.badlogic.gdx.physics.box2d.Body> bodies = getBodies();
             for (com.badlogic.gdx.physics.box2d.Body b : bodies) {

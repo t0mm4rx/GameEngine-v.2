@@ -22,6 +22,7 @@ import fr.tommarx.gameengine.Easing.Tween;
 import fr.tommarx.gameengine.Easing.TweenListener;
 import fr.tommarx.gameengine.UI.UICanvas;
 import fr.tommarx.gameengine.Util.LayoutSorter;
+import fr.tommarx.gameengine.Util.Math;
 
 public abstract class Screen implements com.badlogic.gdx.Screen {
 
@@ -214,13 +215,12 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
             Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
             Vector2 a = new Vector2(camera.position.x - Gdx.graphics.getWidth() / 100 / 2 - 1, camera.position.y - Gdx.graphics.getHeight() / 100 / 2 - 1);
-            for (float x = ((float)Math.ceil(a.x)); x < Gdx.graphics.getWidth() / 100 + a.x + 1; x += 1) {
-                Game.getCurrentScreen().shapeRenderer.setColor(new Color(255, 255, 255, 0.2f));
-                Game.getCurrentScreen().shapeRenderer.line(x, ((float)Math.ceil(a.y)) - 1, x, Gdx.graphics.getHeight() / 100 + a.y + 1);
+            Game.getCurrentScreen().shapeRenderer.setColor(new Color(255, 255, 255, 0.1f - camera.zoom / 100));
+            for (float x = ((float)Math.ceil(a.x)) - camera.zoom * 10; x < (Gdx.graphics.getWidth() / 100 + a.x + 1) * camera.zoom * 10; x += 1) {
+                Game.getCurrentScreen().shapeRenderer.line(x, ((float)Math.ceil(a.y)) - camera.zoom * 10, x, (Gdx.graphics.getHeight() / 100 + a.y + 1) * camera.zoom * 10);
             }
-            for (float y = ((float)Math.ceil(a.y)) - 1; y < Gdx.graphics.getHeight() / 100 + a.y + 1; y += 1) {
-                Game.getCurrentScreen().shapeRenderer.setColor(new Color(255, 255, 255, 0.2f));
-                Game.getCurrentScreen().shapeRenderer.line(((float)Math.ceil(a.x)), y, Gdx.graphics.getWidth() / 100 + a.x + 1, y);
+            for (float y = ((float)Math.ceil(a.y)) - camera.zoom * 10; y < (Gdx.graphics.getHeight() / 100 + a.y + 1) * camera.zoom * 10; y += 1) {
+                Game.getCurrentScreen().shapeRenderer.line(((float)Math.ceil(a.x)) - camera.zoom * 10, y, (Gdx.graphics.getWidth() / 100 + a.x + 1) * camera.zoom * 10, y);
             }
             Game.getCurrentScreen().shapeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);

@@ -18,6 +18,13 @@ public class Particle extends AbstractGameObject{
         addComponent(b);
     }
 
+    public Particle(Transform transform, Vector2 a) {
+        super(transform);
+        Body b = new ShapeBody(this, new Vector2[]{ Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f) }, BodyDef.BodyType.DynamicBody, false);
+        b.getBody().applyForceToCenter(a.scl(2), false);
+        addComponent(b);
+    }
+
     protected void update(float delta) {
         if (getTransform().getPosition().y < -5) {
             Game.getCurrentScreen().remove(this);

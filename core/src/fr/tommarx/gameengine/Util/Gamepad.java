@@ -11,4 +11,8 @@ public class Gamepad {
         return Controllers.getControllers();
     }
 
+    public static Controller getController(int i) {
+        return Controllers.getControllers().get(i);
+    }
+
 }

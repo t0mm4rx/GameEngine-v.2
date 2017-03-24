@@ -12,4 +12,4 @@
 - [x] Game object direction et isMoving
 - [x] Tweening --> event based
 - [x] Join Box2D
-- [ ] Keys --> Gamepad
+- [x] Keys --> Gamepad

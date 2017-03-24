@@ -79,7 +79,7 @@ public class PhysicsScene extends Screen {
         if (Keys.isKeyJustPressed(Input.Keys.E)) {
             Array<com.badlogic.gdx.physics.box2d.Body> bodies = getBodies();
             for (com.badlogic.gdx.physics.box2d.Body b : bodies) {
-                b.applyForceToCenter(b.getPosition().cpy().sub(Game.center).nor().scl(10), false);
+                b.applyForceToCenter(b.getPosition().cpy().sub(new Vector2(6, 2)).nor().scl((1 / b.getPosition().dst(new Vector2(6, 2)) * 10)), false);
             }
         }
     }

@@ -33,7 +33,7 @@ public class Math {
         return (float) java.lang.Math.ceil(a);
     }
 
-    public static float sqr(float a) {
+    public static float sqrt(float a) {
         return (float) java.lang.Math.sqrt(a);
     }
 

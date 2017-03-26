@@ -59,7 +59,9 @@ public class PhysicsScene extends Screen {
             add(new Particle(new Transform(new Vector2(5, 5))));
         }
         float speed = 0.05f;
-        Vector2 axis2 = new Vector2(Gamepad.getController(0).getAxis(3), -Gamepad.getController(0).getAxis(2));
+        Vector2 axis2 = new Vector2();
+        if (Gamepad.isController())
+            axis2= new Vector2(Gamepad.getController(0).getAxis(3), -Gamepad.getController(0).getAxis(2));
         if (axis2.len() > 0.1f) {
             a.getBody().setTransform(a.getBody().getPosition().x + axis2.x / 10, a.getBody().getPosition().y + axis2.y / 10, 0);
         }
@@ -83,12 +85,15 @@ public class PhysicsScene extends Screen {
         }
         Game.debug(3, "isPressed : " + Keys.isKeyPressed(Input.Keys.MINUS));
         if (Keys.isKeyJustPressed(Input.Keys.E)) {
+            shake(0.1f, 500);
             Array<com.badlogic.gdx.physics.box2d.Body> bodies = getBodies();
             for (com.badlogic.gdx.physics.box2d.Body b : bodies) {
                 b.applyForceToCenter(b.getPosition().cpy().sub(new Vector2(6, 2)).nor().scl((1 / b.getPosition().dst(new Vector2(6, 2)) * 10)), false);
             }
         }
-        Vector2 axis1 = new Vector2(Gamepad.getController(0).getAxis(0), -Gamepad.getController(0).getAxis(1));
+        Vector2 axis1 = new Vector2();
+        if (Gamepad.isController())
+            axis1 = new Vector2(Gamepad.getController(0).getAxis(0), -Gamepad.getController(0).getAxis(1));
         if (axis1.len() > 0.1f) {
             add(new Particle(new Transform(new Vector2(5, 5)), axis1));
         }

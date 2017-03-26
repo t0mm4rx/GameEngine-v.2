@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
@@ -39,6 +40,10 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     private Vector2 lastCamPosition;
     protected String id;
     private GameObject overlay;
+    //Shaking
+    private float shakingDuration = 0, shakingElapsed = 0, shakingIntensity = 0;
+    private Vector3 shakingLastCam = new Vector3();
+    private boolean isShaking = false;
 
     public Screen (Game game) {
         this.game = game;
@@ -187,6 +192,21 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         Game.batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
 
+
+        if (isShaking) {
+            if (shakingElapsed > shakingDuration) {
+                camera.position.set(shakingLastCam);
+                shakingDuration = 0;
+                shakingElapsed = 0;
+                shakingIntensity = 0;
+                isShaking = false;
+            } else {
+                //System.out.println(shakingIntensity + " ==> " + Math.random(-shakingIntensity, shakingIntensity));
+                camera.position.set(shakingLastCam.x + Math.random(-shakingIntensity, shakingIntensity) * (1 - shakingElapsed / shakingDuration), shakingLastCam.y + Math.random(-shakingIntensity, shakingIntensity) * (1 - shakingElapsed / shakingDuration), shakingLastCam.z);
+                shakingElapsed += Gdx.graphics.getDeltaTime() * 1000;
+            }
+        }
+
         Vector2 cam_move = new Vector2(camera.position.x - lastCamPosition.x, camera.position.y - lastCamPosition.y);
         for (Drawable d : drawables) {
             if (d.isGameObject()) {
@@ -323,6 +343,16 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         Array<com.badlogic.gdx.physics.box2d.Body> bodies = new Array<>();
         Game.getCurrentScreen().world.getBodies(bodies);
         return bodies;
+    }
+
+    public void shake(float intensity, float duration) {
+        shakingDuration = duration;
+        shakingElapsed = 0;
+        shakingIntensity = intensity;
+        if (!isShaking) {
+            shakingLastCam = camera.position.cpy();
+        }
+        isShaking = true;
     }
 
 

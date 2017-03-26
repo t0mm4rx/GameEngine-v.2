@@ -13,3 +13,6 @@
 - [x] Tweening --> event based
 - [x] Join Box2D
 - [x] Keys --> Gamepad
+- [x] Screen shake
+- [ ] Bug random de la classe Math
+- [ ] Particles

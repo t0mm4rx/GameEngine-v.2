@@ -56,12 +56,7 @@ public class Transform extends Component {
 
     public void renderInHUD() {}
 
-    public void update() {
+    public void update() {}
 
-    }
-
-    @Override
-    public void dispose() {
-
-    }
+    public void dispose() {}
 }

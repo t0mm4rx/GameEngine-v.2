@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 
 import box2dLight.RayHandler;
 import fr.tommarx.gameengine.Game.AbstractGameObject;
+import fr.tommarx.gameengine.Game.Game;
 
 public class PointLight extends Component {
 
@@ -13,12 +14,12 @@ public class PointLight extends Component {
     private float lastX, lastY;
     private RayHandler rayHandler;
 
-    public PointLight(AbstractGameObject go, int power, int length, Color color, RayHandler rayHandler) {
+    public PointLight(AbstractGameObject go, int power, int length, Color color) {
         super(go);
         this.power = power;
         this.length = length;
         this.color = color;
-        this.rayHandler = rayHandler;
+        this.rayHandler = Game.getCurrentScreen().getRayHandler();
         light = new box2dLight.PointLight(rayHandler, power, color, length, go.getTransform().getPosition().x, go.getTransform().getPosition().y);
         lastX = go.getTransform().getPosition().x;
         lastY = go.getTransform().getPosition().y;

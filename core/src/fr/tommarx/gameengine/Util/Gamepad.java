@@ -11,6 +11,10 @@ public class Gamepad {
         return Controllers.getControllers();
     }
 
+    public static boolean isController() {
+        return (getGamepads().size > 0 ? true : false);
+    }
+
     public static Controller getController(int i) {
         if (getGamepads().size > 0)
             return Controllers.getControllers().get(i);

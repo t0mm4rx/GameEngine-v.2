@@ -14,5 +14,6 @@
 - [x] Join Box2D
 - [x] Keys --> Gamepad
 - [x] Screen shake
+- [ ] HTTP Request
 - [ ] Bug random de la classe Math
 - [ ] Particles

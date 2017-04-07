@@ -1,4 +1,4 @@
-package org.json;
+package fr.tommarx.gameengine.JSON;
 
 import static java.lang.String.format;
 

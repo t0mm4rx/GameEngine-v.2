@@ -1,4 +1,4 @@
-package org.json;
+package fr.tommarx.gameengine.JSON;
 
 /*
 Copyright (c) 2015 JSON.org

@@ -1,4 +1,4 @@
-package org.json;
+package fr.tommarx.gameengine.JSON;
 
 import java.io.IOException;
 

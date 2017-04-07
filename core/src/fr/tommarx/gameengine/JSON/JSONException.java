@@ -1,4 +1,4 @@
-package org.json;
+package fr.tommarx.gameengine.JSON;
 
 /**
  * The JSONException is thrown by the JSON.org classes when things are amiss.

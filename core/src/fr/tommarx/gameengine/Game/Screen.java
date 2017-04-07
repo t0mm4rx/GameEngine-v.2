@@ -49,9 +49,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         this.game = game;
         camera = new OrthographicCamera(Gdx.graphics.getWidth() / 100, Gdx.graphics.getHeight() / 100);
         camera.position.set(Game.center.x, Game.center.y, 0);
-        drawables = new ArrayList<Drawable>();
-        drawablesHUD = new ArrayList<Drawable>();
-        toDelete = new ArrayList<Drawable>();
+        drawables = new ArrayList<>();
+        drawablesHUD = new ArrayList<>();
+        toDelete = new ArrayList<>();
         world = new World(new Vector2(0, -9.8f), true);
         colliderRenderer = new Box2DDebugRenderer();
         shapeRenderer = new ShapeRenderer();
@@ -192,7 +192,6 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         Game.batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
 
-
         if (isShaking) {
             if (shakingElapsed > shakingDuration) {
                 camera.position.set(shakingLastCam);
@@ -279,7 +278,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public abstract void update();
 
     public void resize(int width, int height) {
-        Game.center = new Vector2(width / 2, height / 2);
+        Game.center = new Vector2(width / 2 / 100, height / 2 / 100);
     }
 
     public void pause() {

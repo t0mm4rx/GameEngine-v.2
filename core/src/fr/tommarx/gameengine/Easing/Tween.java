@@ -100,7 +100,6 @@ public class Tween {
             }
         } else {
             listener.onValueChanged(value);
-            System.out.println(value);
         }
     }
 

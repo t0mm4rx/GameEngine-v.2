@@ -85,6 +85,14 @@ public abstract class Game extends com.badlogic.gdx.Game {
         }
     }
 
+    public static void debug(int line, Vector2 v) {
+        if (line > 0 && line < 11) {
+            debugInfos[line - 1] = "X: " + v.x + "  , Y: " + v.y;
+        } else {
+            System.out.println("Error with debug fonction ! Line must be > 0 and <= 10");
+        }
+    }
+
     public void setScreen(Screen screen) {
         this.screen = screen;
         super.setScreen(screen);

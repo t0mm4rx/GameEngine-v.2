@@ -25,7 +25,7 @@ public class NetScreen extends Screen {
             }
 
             public void onFail(String message) {
-                System.out.println("Failed...\n" + message);
+                System.err.println("Failed...\n" + message);
             }
         });
     }

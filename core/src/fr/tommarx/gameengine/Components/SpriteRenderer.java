@@ -35,6 +35,17 @@ public class SpriteRenderer extends Component {
         this.offsetY = offsetY;
     }
 
+    public SpriteRenderer (AbstractGameObject go, FileHandle texture, float offsetX, float offsetY, float width, float height) {
+        super(go);
+        this.texture = new TextureRegion(new Texture(texture));
+        this.width = width;
+        this.height = height;
+        flippedX = false;
+        flippedY = false;
+        this.offsetX = offsetX;
+        this.offsetY = offsetY;
+    }
+
 
     public void setTexture(TextureRegion texture) {
         this.texture = texture;

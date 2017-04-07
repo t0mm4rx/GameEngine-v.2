@@ -1,5 +1,6 @@
 package fr.tommarx.gameengine.Components;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -42,13 +43,14 @@ public class Text extends Component {
     }
 
     public void render() {
+        Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined.cpy().scale(0.01f, 0.01f, 1));
         glyphLayout.setText(font, text);
         font.getData().setScale(getGameObject().getTransform().getScale().x, getGameObject().getTransform().getScale().y);
         font.setColor(color);
         font.draw(Game.batch,
                 text,
-                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 + offsetX,
-                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 + offsetY
+                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 / 100 + offsetX,
+                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 / 100 + offsetY
         );
     }
 
@@ -58,8 +60,8 @@ public class Text extends Component {
         font.setColor(color);
         font.draw(Game.HUDbatch,
                 text,
-                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 + offsetX,
-                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 + offsetY
+                getGameObject().getTransform().getPosition().x - glyphLayout.width / 2 / 100 + offsetX,
+                getGameObject().getTransform().getPosition().y - glyphLayout.height / 2 / 100 + offsetY
         );
     }
 

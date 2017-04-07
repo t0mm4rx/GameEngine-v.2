@@ -75,6 +75,8 @@ public abstract class AbstractGameObject extends Drawable {
     }
 
     public void render() {
+        Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined);
+        Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
         for (Component comp : LayoutSorter.sortComponentsByLayout(components)) {
             comp.render();
         }

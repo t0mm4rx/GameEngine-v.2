@@ -7,7 +7,7 @@ public class TweenManager {
     ArrayList<Tween> tweens;
 
     public TweenManager () {
-        tweens = new ArrayList<Tween>();
+        tweens = new ArrayList<>();
     }
 
     public void addTween(Tween tween) {
@@ -15,12 +15,14 @@ public class TweenManager {
     }
 
     public void update() {
-        ArrayList<Tween> toDelete = new ArrayList<Tween>();
-        for (Tween tween : tweens) {
+        ArrayList<Tween> toDelete = new ArrayList<>();
+        for (int i = 0; i < tweens.size(); i++) {
+            Tween tween = tweens.get(i);
             if (tween.isFinished()) {
                 toDelete.add(tween);
+            } else {
+                tween.update();
             }
-            tween.update();
         }
         tweens.removeAll(toDelete);
     }

@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 
+import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.Draw;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.Screen;
@@ -20,6 +21,7 @@ import fr.tommarx.gameengine.JSON.JSONObject;
 import fr.tommarx.gameengine.Net.HTTP;
 import fr.tommarx.gameengine.Net.HTTPListener;
 import fr.tommarx.gameengine.Util.Keys;
+import fr.tommarx.gameengine.Util.Touch;
 import fr.tommarx.gameengine.Util.Util;
 
 public class NetScreen extends Screen {
@@ -92,7 +94,13 @@ public class NetScreen extends Screen {
         if (Keys.isKeyPressed(Input.Keys.NUMPAD_8)) {
             camera.zoom += 0.1f;
         }
+        if (Touch.isJustTouched()) {
+            System.out.println(Touch.getPosition());
+            //add(new Coin(new Transform(Touch.getProjectedPosition())));
+        }
         Game.debug(2, "FPS : " + Gdx.graphics.getFramesPerSecond());
+        Game.debug(3, Touch.getPosition());
+        Game.debug(4, Touch.getProjectedPosition());
     }
 
     public void renderBefore() {

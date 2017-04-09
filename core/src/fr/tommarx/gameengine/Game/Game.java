@@ -13,6 +13,7 @@ import java.util.concurrent.Callable;
 
 import fr.tommarx.gameengine.Easing.TweenManager;
 import fr.tommarx.gameengine.Util.Keys;
+import fr.tommarx.gameengine.Util.Touch;
 import fr.tommarx.gameengine.Util.WaitAndDo;
 
 
@@ -69,6 +70,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
 
         debugInfos = new String[10];
         Keys.handleInputs();
+        Touch.handleInputs();
 
     }
 

@@ -1,6 +1,5 @@
 package fr.tommarx.gameengine.Components;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
@@ -52,6 +51,7 @@ public class Text extends Component {
                 getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 / 100 + offsetX,
                 getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 / 100 + offsetY
         );
+        Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined.cpy().scale(1f, 1f, 1f));
     }
 
     public void renderInHUD() {

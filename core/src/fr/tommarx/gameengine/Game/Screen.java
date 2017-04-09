@@ -67,6 +67,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         id = UUID.randomUUID().toString();
     }
 
+    public abstract void renderBefore();
+    public abstract void renderAfter();
+
     public AbstractGameObject getGameObjectByClass(String className) {
 
         for (Drawable go : drawables) {
@@ -214,6 +217,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         }
         lastCamPosition = new Vector2(camera.position.x, camera.position.y);
 
+        renderBefore();
         for (Drawable d : LayoutSorter.sortByLayout(drawables)) {
             d.render();
             d.update();
@@ -246,6 +250,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             Game.batch.begin();
             colliderRenderer.render(world, Game.batch.getProjectionMatrix().cpy().scale(1, 1, 0));
         }
+
+        renderAfter();
 
         ArrayList<Drawable> toDelete2 = new ArrayList<>();
         for (Drawable d : toDelete) {

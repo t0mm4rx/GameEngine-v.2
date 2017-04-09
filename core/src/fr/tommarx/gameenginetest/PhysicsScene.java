@@ -25,6 +25,16 @@ public class PhysicsScene extends Screen {
         super(game);
     }
 
+    @Override
+    public void renderBefore() {
+
+    }
+
+    @Override
+    public void renderAfter() {
+
+    }
+
     Body a;
 
     public void show() {

@@ -22,6 +22,16 @@ public class TestScreen extends Screen{
         super(game);
     }
 
+    @Override
+    public void renderBefore() {
+
+    }
+
+    @Override
+    public void renderAfter() {
+
+    }
+
     public void show() {
         GameObject background = new GameObject(new Transform(new Vector2(0, Game.center.y)));
         background.addComponent(new BoxRenderer(background, Gdx.graphics.getWidth() / 100, Gdx.graphics.getHeight() / 10, Color.LIGHT_GRAY));

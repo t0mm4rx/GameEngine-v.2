@@ -12,6 +12,14 @@ public class LightScreen extends Screen {
         super(game);
     }
 
+    public void renderBefore() {
+
+    }
+
+    public void renderAfter() {
+
+    }
+
     public void show() {
         areLightsEnabled(true);
         getRayHandler().setAmbientLight(0.7f, 0.7f, 1f, .03f);

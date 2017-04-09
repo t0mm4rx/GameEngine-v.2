@@ -2,6 +2,7 @@ package fr.tommarx.gameengine.Game;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -11,7 +12,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -21,7 +24,6 @@ import fr.tommarx.gameengine.Components.BoxRenderer;
 import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Easing.Tween;
 import fr.tommarx.gameengine.Easing.TweenListener;
-import fr.tommarx.gameengine.UI.UICanvas;
 import fr.tommarx.gameengine.Util.LayoutSorter;
 import fr.tommarx.gameengine.Util.Math;
 
@@ -44,6 +46,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     private float shakingDuration = 0, shakingElapsed = 0, shakingIntensity = 0;
     private Vector3 shakingLastCam = new Vector3();
     private boolean isShaking = false;
+    private Stage stage;
 
     public Screen (Game game) {
         this.game = game;
@@ -64,6 +67,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         overlay.addComponent(new BoxRenderer(overlay, Gdx.graphics.getWidth() * 2, Gdx.graphics.getHeight() * 2, new Color(0f, 0f, 0f, 0f)));
         overlay.setLayout(1000);
         addInHUD(overlay);
+        stage = new Stage();
+        stage.setViewport(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera));
+        Gdx.input.setInputProcessor(stage);
         id = UUID.randomUUID().toString();
     }
 
@@ -245,6 +251,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             Gdx.gl.glDisable(GL20.GL_BLEND);
             Game.batch.begin();
             colliderRenderer.render(world, Game.batch.getProjectionMatrix().cpy().scale(1, 1, 0));
+            stage.setDebugAll(true);
+        } else {
+            stage.setDebugAll(false);
         }
 
         ArrayList<Drawable> toDelete2 = new ArrayList<>();
@@ -255,6 +264,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         toDelete.removeAll(toDelete2);
 
         update();
+        stage.act(Gdx.graphics.getDeltaTime());
+        stage.draw();
 
     }
 
@@ -279,6 +290,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     public void resize(int width, int height) {
         Game.center = new Vector2(width / 2 / 100, height / 2 / 100);
+        stage.getViewport().update(width, height);
     }
 
     public void pause() {
@@ -295,16 +307,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     public void dispose() {
         rayHandler.dispose();
-        for (Drawable canvas : drawables) {
-            if (canvas.getClass().getSimpleName().equals("UICanvas")) {
-                ((UICanvas) canvas).dispose();
-            }
-        }
-        for (Drawable canvas : drawablesHUD) {
-            if (canvas.getClass().getSimpleName().equals("UICanvas")) {
-                ((UICanvas) canvas).dispose();
-            }
-        }
+        stage.dispose();
     }
 
 
@@ -354,5 +357,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         isShaking = true;
     }
 
-
+    public Stage getStage() {
+        return stage;
+    }
 }

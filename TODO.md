@@ -14,6 +14,9 @@
 - [x] Join Box2D
 - [x] Keys --> Gamepad
 - [x] Screen shake
-- [ ] HTTP Request
+- [x] HTTP Request
+- [x] Class draw
+- [x] Terminer de synchroniser UI avec camera
+- [x] Régler bordel camera qd on zoom et se déplace
 - [ ] Bug random de la classe Math
 - [ ] Particles

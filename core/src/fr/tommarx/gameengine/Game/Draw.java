@@ -1,14 +1,12 @@
 package fr.tommarx.gameengine.Game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 
 public class Draw {
 
@@ -71,6 +69,19 @@ public class Draw {
         Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         Game.getCurrentScreen().shapeRenderer.setColor(color);
         Game.getCurrentScreen().shapeRenderer.circle(x - radius / 2, y - radius / 2, radius, 100);
+        Game.getCurrentScreen().shapeRenderer.end();
+        Gdx.gl.glDisable(GL20.GL_BLEND);
+        Game.batch.begin();
+    }
+
+    public static void line(float x1, float y1, float x2, float y2, Color color) {
+        Game.batch.end();
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+        Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
+        Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+        Game.getCurrentScreen().shapeRenderer.setColor(color);
+        Game.getCurrentScreen().shapeRenderer.line(x1, y1, x2, y2);
         Game.getCurrentScreen().shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
         Game.batch.begin();

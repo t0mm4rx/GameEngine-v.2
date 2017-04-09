@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 
 import java.util.concurrent.Callable;
@@ -86,6 +87,14 @@ public abstract class Game extends com.badlogic.gdx.Game {
     }
 
     public static void debug(int line, Vector2 v) {
+        if (line > 0 && line < 11) {
+            debugInfos[line - 1] = "X: " + v.x + "  , Y: " + v.y;
+        } else {
+            System.out.println("Error with debug fonction ! Line must be > 0 and <= 10");
+        }
+    }
+
+    public static void debug(int line, Vector3 v) {
         if (line > 0 && line < 11) {
             debugInfos[line - 1] = "X: " + v.x + "  , Y: " + v.y;
         } else {

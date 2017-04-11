@@ -96,11 +96,8 @@ public class NetScreen extends Screen {
         }
         if (Touch.isJustTouched()) {
             System.out.println(Touch.getPosition());
-            //add(new Coin(new Transform(Touch.getProjectedPosition())));
         }
-        Game.debug(2, "FPS : " + Gdx.graphics.getFramesPerSecond());
-        Game.debug(3, Touch.getPosition());
-        Game.debug(4, Touch.getProjectedPosition());
+        Game.debug(1, "FPS : " + Gdx.graphics.getFramesPerSecond());
     }
 
     public void renderBefore() {

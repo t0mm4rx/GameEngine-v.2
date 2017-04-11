@@ -18,6 +18,7 @@
 - [x] Class draw
 - [x] Terminer de synchroniser UI avec camera
 - [x] Régler bordel camera qd on zoom et se déplace
-- [ ] justClick
-- [ ] Bug random de la classe Math
+- [x] justClick
+- [x] Bug random de la classe Math
+- [ ] Execute every X seconds
 - [ ] Particles

@@ -15,6 +15,7 @@ public abstract class Component extends Drawable {
       offsetY = 0;
    }
 
+
    protected AbstractGameObject getGameObject(){
       return go;
    }

@@ -21,6 +21,7 @@ import fr.tommarx.gameengine.JSON.JSONObject;
 import fr.tommarx.gameengine.Net.HTTP;
 import fr.tommarx.gameengine.Net.HTTPListener;
 import fr.tommarx.gameengine.Util.Keys;
+import fr.tommarx.gameengine.Util.Math;
 import fr.tommarx.gameengine.Util.Touch;
 import fr.tommarx.gameengine.Util.Util;
 
@@ -55,7 +56,7 @@ public class NetScreen extends Screen {
             }
         });
         getStage().addActor(button);
-        camera.zoom = 5;
+        //camera.zoom = 5;
     }
 
     public void getPos(String city) {
@@ -93,6 +94,9 @@ public class NetScreen extends Screen {
         }
         if (Keys.isKeyPressed(Input.Keys.NUMPAD_8)) {
             camera.zoom += 0.1f;
+        }
+        if (Keys.isKeyJustPressed(Input.Keys.R)) {
+            shake(1, 500);
         }
         if (Touch.isJustTouched()) {
             System.out.println(Touch.getPosition());

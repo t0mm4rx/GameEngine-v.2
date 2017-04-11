@@ -15,7 +15,7 @@ public class Math {
     }
 
     public static float random(float min, float max) {
-        return (float) (java.lang.Math.random() * ((max - min) + 1)) + min;
+        return (float) (java.lang.Math.random() * (max - min)) + min;
     }
 
     public static int randomInt(int min, int max) {

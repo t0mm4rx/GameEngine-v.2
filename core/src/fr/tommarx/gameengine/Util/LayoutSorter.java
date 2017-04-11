@@ -58,4 +58,28 @@ public class LayoutSorter {
         return finalList;
     }
 
+    public static ArrayList<Particle> sortParticlesByLayout(ArrayList<Particle> target) {
+        ArrayList<Integer> zindexes = new ArrayList<>();
+        ArrayList<Particle> finalList = new ArrayList<>();
+
+        for (Particle d : target) {
+            if (!zindexes.contains(d.getLayout())) {
+                zindexes.add(d.getLayout());
+            }
+        }
+
+        Collections.sort(zindexes);
+
+        for (int z : zindexes) {
+            for (Particle d : target) {
+                if (d.getLayout() == z) {
+                    finalList.add(d);
+                }
+            }
+        }
+
+        zindexes.clear();
+        return finalList;
+    }
+
 }

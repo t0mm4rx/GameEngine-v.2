@@ -59,4 +59,8 @@ public class Transform extends Component {
     public void update() {}
 
     public void dispose() {}
+
+    public Transform cpy() {
+        return new Transform(this.getPosition().cpy(), this.getScale().cpy(), this.getRotation());
+    }
 }

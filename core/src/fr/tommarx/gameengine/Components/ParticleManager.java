@@ -18,7 +18,6 @@ public class ParticleManager extends Component {
 
     public void addParticle(Particle p) {
         particles.add(p);
-        p.show();
     }
 
     public void render() {

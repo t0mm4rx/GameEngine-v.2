@@ -66,7 +66,7 @@ public class PhysicsScene extends Screen {
         Game.debug(1, "FPS : " + Gdx.graphics.getFramesPerSecond());
         Game.debug(2, "Bodies : " + Game.getCurrentScreen().getGameObjects().size());
         if (Keys.isKeyPressed(62)) {
-            add(new Particle(new Transform(new Vector2(5, 5))));
+            //add(new Particle(new Transform(new Vector2(5, 5))));
         }
         float speed = 0.05f;
         Vector2 axis2 = new Vector2();
@@ -105,7 +105,7 @@ public class PhysicsScene extends Screen {
         if (Gamepad.isController())
             axis1 = new Vector2(Gamepad.getController(0).getAxis(0), -Gamepad.getController(0).getAxis(1));
         if (axis1.len() > 0.1f) {
-            add(new Particle(new Transform(new Vector2(5, 5)), axis1));
+            //add(new Particle(new Transform(new Vector2(5, 5)), axis1));
         }
     }
 

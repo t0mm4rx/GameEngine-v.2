@@ -1,33 +1,23 @@
 package fr.tommarx.gameenginetest;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import fr.tommarx.gameengine.Components.ShapeBody;
-import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Util.Math;
-import fr.tommarx.gameengine.Components.Body;
+
 import fr.tommarx.gameengine.Components.Transform;
-import fr.tommarx.gameengine.Game.AbstractGameObject;
+import fr.tommarx.gameengine.Game.Draw;
+import fr.tommarx.gameengine.Util.Math;
 
-public class Particle extends AbstractGameObject{
-    public Particle(Transform transform) {
-        super(transform);
-        Body b = new ShapeBody(this, new Vector2[]{ Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f) }, BodyDef.BodyType.DynamicBody, false);
-        Vector2 v = Math.randomVector2(2);
-        b.getBody().applyForceToCenter(v, false);
-        addComponent(b);
+public class Particle extends fr.tommarx.gameengine.Util.Particle{
+
+    Vector2 force;
+
+    public Particle(Transform transform, int lifetime) {
+        super(transform.cpy(), lifetime);
+        force = Math.randomVector2(0.01f);
     }
 
-    public Particle(Transform transform, Vector2 a) {
-        super(transform);
-        Body b = new ShapeBody(this, new Vector2[]{ Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f), Math.randomVector2(0.1f) }, BodyDef.BodyType.DynamicBody, false);
-        b.getBody().applyForceToCenter(a.scl(2), false);
-        addComponent(b);
-    }
-
-    protected void update(float delta) {
-        if (getTransform().getPosition().y < -5) {
-            Game.getCurrentScreen().remove(this);
-        }
+    public void render() {
+        getTransform().getPosition().add(force);
+        Draw.circle(getTransform().getPosition().x, getTransform().getPosition().y, 0.03f, new Color(Math.random(150, 255) / 255, 0.2f, 0.2f, 1));
     }
 }

@@ -20,5 +20,5 @@
 - [x] Régler bordel camera qd on zoom et se déplace
 - [x] justClick
 - [x] Bug random de la classe Math
-- [ ] Execute every X seconds
-- [ ] Particles
+- [x] Execute every X seconds
+- [x] Particles

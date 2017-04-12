@@ -22,3 +22,4 @@
 - [x] Bug random de la classe Math
 - [x] Execute every X seconds
 - [x] Particles
+- [ ] Bug draw texture sans argument scale

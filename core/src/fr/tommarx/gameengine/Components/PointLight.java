@@ -8,13 +8,14 @@ import fr.tommarx.gameengine.Game.Game;
 
 public class PointLight extends Component {
 
-    private int power, length;
+    private int power;
+    private float length;
     private Color color;
     private box2dLight.PointLight light;
     private float lastX, lastY;
     private RayHandler rayHandler;
 
-    public PointLight(AbstractGameObject go, int power, int length, Color color) {
+    public PointLight(AbstractGameObject go, int power, float length, Color color) {
         super(go);
         this.power = power;
         this.length = length;
@@ -28,6 +29,15 @@ public class PointLight extends Component {
 
     public box2dLight.PointLight getLight() {
         return light;
+    }
+
+    public void setLength(float length) {
+        this.length = length;
+        light.setDistance(length);
+    }
+
+    public float getLength() {
+        return length;
     }
 
     public void render() {

@@ -229,6 +229,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             d.render();
             d.update();
         }
+        renderAfter();
 
         if (lightsEnabled) {
             Game.batch.end();
@@ -260,8 +261,6 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         } else {
             stage.setDebugAll(false);
         }
-
-        renderAfter();
 
         ArrayList<Drawable> toDelete2 = new ArrayList<>();
         for (Drawable d : toDelete) {

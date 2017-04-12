@@ -20,7 +20,7 @@ import fr.tommarx.gameengine.Util.Math;
 public class TorchDemo extends Screen {
 
     GameObject torch;
-    Texture wall, _torch;
+    Texture wall;
     PointLight light;
     ParticleManager pm;
 
@@ -34,13 +34,14 @@ public class TorchDemo extends Screen {
         pm = new ParticleManager(torch);
         torch.addComponent(pm);
         torch.addComponent(light);
+        torch.addComponent(new SpriteRenderer(torch, Gdx.files.internal("torch.png"), 0, 0, 0.5f, 0.5f));
         add(torch);
 
         wall = new Texture("wall.png");
-        _torch = new Texture("torch.png");
 
         areLightsEnabled(true);
-        getRayHandler().setAmbientLight(new Color(0, 0, 0.2f, 0.3f));
+        //Game.debugging = true;
+        getRayHandler().setAmbientLight(new Color(0, 0, 0.2f, 0.1f));
         changeLight();
         handleParticles();
     }
@@ -55,8 +56,6 @@ public class TorchDemo extends Screen {
     }
 
     public void renderAfter() {
-        Draw.texture(_torch, Game.center.x, Game.center.y, 1f, 1);
-
     }
 
     public void update() {
@@ -66,12 +65,13 @@ public class TorchDemo extends Screen {
         if (Keys.isKeyPressed(Input.Keys.O)) {
             camera.zoom += 0.1f;
         }
+        //torch.getTransform().getPosition().set(Touch.getProjectedPosition());
     }
 
     private void changeLight() {
         Game.waitAndDo(100, () -> {
             if (light.getLength() > 4.5f && light.getLength() < 5.5f) {
-                light.getLight().setDistance(light.getLength() + Math.random(-0.2f, 0.2f));
+                light.getLight().setDistance(light.getLength() + Math.random(-0.25f, 0.25f));
             } else {
                 light.getLight().setDistance(5);
             }
@@ -82,7 +82,7 @@ public class TorchDemo extends Screen {
 
     private void handleParticles() {
         Game.waitAndDo(100, () -> {
-            pm.addParticle(new FireParticle(torch.getTransform(), 2000));
+            pm.addParticle(new FireParticle(torch.getTransform(), 1200));
             handleParticles();
             return false;
         });
@@ -93,16 +93,20 @@ class FireParticle extends fr.tommarx.gameengine.Util.Particle {
 
     Vector2 force;
     Color color;
+    float size;
 
     public FireParticle(Transform transform, int lifetime) {
         super(transform.cpy(), lifetime);
         force = new Vector2(Math.random(-0.5f, 0.5f), 1).scl(0.015f);
-        color = new Color(Math.random(0.5f, 0.9f), Math.random(0.1f, 0.5f), 0.1f, Math.random(0.2f, 1));
+        color = new Color(Math.random(0.5f, 0.9f), Math.random(0.1f, 0.3f), 0.1f, Math.random(0.2f, 1));
+        size = Math.random(0.02f, 0.05f);
+        getTransform().getPosition().y += 0.3f;
+        getTransform().getPosition().x += Math.random(-0.1f, 0.1f);
         handlePosition();
     }
 
     public void render() {
-        Draw.rect(getTransform().getPosition().x, getTransform().getPosition().y, 0.1f, 0.1f, color);
+        Draw.rect(getTransform().getPosition().x, getTransform().getPosition().y, size, size, color);
         getTransform().getPosition().add(force);
     }
 

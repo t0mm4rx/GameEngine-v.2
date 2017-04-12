@@ -1,7 +1,5 @@
 package fr.tommarx.gameengine.Util;
 
-import com.badlogic.gdx.utils.Array;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -11,8 +9,8 @@ import fr.tommarx.gameengine.Game.Drawable;
 public class LayoutSorter {
 
     public static ArrayList<Drawable> sortByLayout(ArrayList<Drawable> target) {
-        ArrayList<Integer> zindexes = new ArrayList<Integer>();
-        ArrayList<Drawable> finalList = new ArrayList<Drawable>();
+        ArrayList<Integer> zindexes = new ArrayList<>();
+        ArrayList<Drawable> finalList = new ArrayList<>();
 
         for (Drawable d : target) {
             if (!zindexes.contains(d.getLayout())) {
@@ -35,8 +33,8 @@ public class LayoutSorter {
     }
 
     public static ArrayList<Component> sortComponentsByLayout(ArrayList<Component> target) {
-        ArrayList<Integer> zindexes = new ArrayList<Integer>();
-        ArrayList<Component> finalList = new ArrayList<Component>();
+        ArrayList<Integer> zindexes = new ArrayList<>();
+        ArrayList<Component> finalList = new ArrayList<>();
 
         for (Component d : target) {
             if (!zindexes.contains(d.getLayout())) {

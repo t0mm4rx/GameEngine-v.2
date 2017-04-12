@@ -62,6 +62,7 @@ nb-configuration.xml
 ## Gradle
 
 .gradle
+gradle.properties
 gradle-app.setting
 build/
 

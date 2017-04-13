@@ -14,6 +14,7 @@ import fr.tommarx.gameengine.Game.Draw;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
+import fr.tommarx.gameengine.IO.File;
 import fr.tommarx.gameengine.IO.Keys;
 import fr.tommarx.gameengine.Util.*;
 import fr.tommarx.gameengine.Util.Math;
@@ -45,6 +46,9 @@ public class TorchDemo extends Screen {
         getRayHandler().setAmbientLight(new Color(0, 0, 0.2f, 0.1f));
         changeLight();
         handleParticles();
+        System.out.println("File : ");
+        System.out.println(File.read("test.txt"));
+        File.create("test2.txt", "Yes!");
     }
 
     public void renderBefore() {

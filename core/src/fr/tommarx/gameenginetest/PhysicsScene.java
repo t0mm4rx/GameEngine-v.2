@@ -15,8 +15,8 @@ import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
-import fr.tommarx.gameengine.Util.Gamepad;
-import fr.tommarx.gameengine.Util.Keys;
+import fr.tommarx.gameengine.IO.Gamepad;
+import fr.tommarx.gameengine.IO.Keys;
 
 public class PhysicsScene extends Screen {
 

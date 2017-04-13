@@ -1,4 +1,4 @@
-package fr.tommarx.gameengine.Util;
+package fr.tommarx.gameengine.IO;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

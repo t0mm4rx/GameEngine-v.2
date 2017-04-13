@@ -17,12 +17,12 @@ import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.Draw;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.Screen;
+import fr.tommarx.gameengine.IO.Keys;
+import fr.tommarx.gameengine.IO.Touch;
 import fr.tommarx.gameengine.JSON.JSONObject;
 import fr.tommarx.gameengine.Net.HTTP;
 import fr.tommarx.gameengine.Net.HTTPListener;
-import fr.tommarx.gameengine.Util.Keys;
 import fr.tommarx.gameengine.Util.Math;
-import fr.tommarx.gameengine.Util.Touch;
 import fr.tommarx.gameengine.Util.Util;
 
 public class NetScreen extends Screen {

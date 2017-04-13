@@ -5,15 +5,15 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
+
 import fr.tommarx.gameengine.Components.BoxRenderer;
 import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
-import fr.tommarx.gameengine.Util.Keys;
+import fr.tommarx.gameengine.IO.Keys;
+import fr.tommarx.gameengine.IO.MapReader;
 import fr.tommarx.gameengine.Util.MapInterface;
-import fr.tommarx.gameengine.Util.MapReader;
-
 import static com.badlogic.gdx.Gdx.input;
 
 public class TestScreen extends Screen{

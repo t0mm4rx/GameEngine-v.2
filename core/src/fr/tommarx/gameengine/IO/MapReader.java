@@ -1,7 +1,9 @@
-package fr.tommarx.gameengine.Util;
+package fr.tommarx.gameengine.IO;
 
 
 import com.badlogic.gdx.files.FileHandle;
+
+import fr.tommarx.gameengine.Util.MapInterface;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

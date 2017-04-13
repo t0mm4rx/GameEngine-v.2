@@ -7,8 +7,8 @@ import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
-import fr.tommarx.gameengine.Util.Keys;
-import fr.tommarx.gameengine.Util.Touch;
+import fr.tommarx.gameengine.IO.Keys;
+import fr.tommarx.gameengine.IO.Touch;
 import fr.tommarx.gameengine.Util.WaitAndDo;
 
 public class ParticleScene extends Screen {

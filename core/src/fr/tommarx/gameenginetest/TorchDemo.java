@@ -14,6 +14,7 @@ import fr.tommarx.gameengine.Game.Draw;
 import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Game.GameObject;
 import fr.tommarx.gameengine.Game.Screen;
+import fr.tommarx.gameengine.IO.Keys;
 import fr.tommarx.gameengine.Util.*;
 import fr.tommarx.gameengine.Util.Math;
 

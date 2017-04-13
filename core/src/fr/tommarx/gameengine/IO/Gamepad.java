@@ -1,4 +1,4 @@
-package fr.tommarx.gameengine.Util;
+package fr.tommarx.gameengine.IO;
 
 
 import com.badlogic.gdx.controllers.Controller;

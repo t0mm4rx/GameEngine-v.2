@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.BodyDef;
-
 import com.badlogic.gdx.physics.box2d.Contact;
+
 import fr.tommarx.gameengine.Collisions.CollisionsListener;
 import fr.tommarx.gameengine.Collisions.CollisionsManager;
 import fr.tommarx.gameengine.Components.Body;
@@ -15,7 +15,7 @@ import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Drawable;
 import fr.tommarx.gameengine.Game.Game;
-import fr.tommarx.gameengine.Util.Keys;
+import fr.tommarx.gameengine.IO.Keys;
 
 public class Player extends AbstractGameObject {
 

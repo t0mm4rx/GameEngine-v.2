@@ -37,4 +37,12 @@ public class Math {
         return (float) java.lang.Math.sqrt(a);
     }
 
+    public static float sqrd(float a) {
+        return a * a;
+    }
+
+    public static float abs(float a) {
+        return sqrt(sqrd(a));
+    }
+
 }

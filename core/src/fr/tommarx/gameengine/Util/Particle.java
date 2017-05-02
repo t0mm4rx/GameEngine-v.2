@@ -14,6 +14,7 @@ public abstract class Particle extends GameObject {
         this.timeB = System.currentTimeMillis();
     }
 
+
     public abstract void render();
 
     public void update() {

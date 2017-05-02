@@ -2,6 +2,7 @@ package fr.tommarx.gameengine.Components;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
@@ -51,7 +52,13 @@ public class SpriteRenderer extends Component {
         this.texture = texture;
     }
 
+    public void setTexture(FileHandle file) {
+        this.texture = new TextureRegion(new Texture(file));
+    }
+
     public void render() {
+        Gdx.gl.glEnable(GL20.GL_BLEND);
+        Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Game.batch.draw(texture,
                 getGameObject().getTransform().getPosition().x - width / 2 + offsetX,
                 getGameObject().getTransform().getPosition().y - height / 2 + offsetY,

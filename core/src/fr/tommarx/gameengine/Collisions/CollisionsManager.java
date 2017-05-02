@@ -18,7 +18,9 @@ public class CollisionsManager {
             public void beginContact(Contact contact) {
                 AbstractGameObject a = getGameObjectByBody(contact.getFixtureA().getBody());
                 AbstractGameObject b = getGameObjectByBody(contact.getFixtureB().getBody());
-                collisionsListener.collisionEnter(a, b, contact);
+                if (a != null && b != null) {
+                    collisionsListener.collisionEnter(a, b, contact);
+                }
             }
 
             public void endContact(Contact contact) {

@@ -38,6 +38,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public Game game;
     private RayHandler rayHandler;
     public ShapeRenderer shapeRenderer;
+    public PolygonSpriteBatch polyBatch;
     public World world;
     private Box2DDebugRenderer colliderRenderer;
     private boolean lightsEnabled;
@@ -60,6 +61,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         world = new World(new Vector2(0, -9.8f), true);
         colliderRenderer = new Box2DDebugRenderer();
         shapeRenderer = new ShapeRenderer();
+        polyBatch = new PolygonSpriteBatch();
         rayHandler = new RayHandler(world);
         rayHandler.setCombinedMatrix(camera);
         rayHandler.setBlur(true);
@@ -202,6 +204,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         camera.update();
         Game.batch.setProjectionMatrix(camera.combined);
         shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
+        polyBatch.setProjectionMatrix(Game.batch.getProjectionMatrix());
 
         if (isShaking) {
             if (shakingElapsed > shakingDuration) {
@@ -261,7 +264,12 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             stage.setDebugAll(true);
         } else {
             stage.setDebugAll(false);
+            /**** Dafuq part *****/
+            Game.batch.end();
+            Game.batch.begin();
         }
+
+
 
         ArrayList<Drawable> toDelete2 = new ArrayList<>();
         for (Drawable d : toDelete) {

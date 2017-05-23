@@ -23,3 +23,6 @@
 - [x] Execute every X seconds
 - [x] Particles
 - [x] Bug draw texture sans argument scale
+- [x] Essayer afficher image centrée
+- [ ] Skeleton
+- [ ] Changer layout de la cam --> même résolution

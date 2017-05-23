@@ -16,7 +16,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -53,7 +55,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     public Screen (Game game) {
         this.game = game;
-        camera = new OrthographicCamera(Gdx.graphics.getWidth() / 100, Gdx.graphics.getHeight() / 100);
+        camera = new OrthographicCamera(Game.size.x, Game.size.y);
         camera.position.set(Game.center.x, Game.center.y, 0);
         drawables = new ArrayList<>();
         drawablesHUD = new ArrayList<>();
@@ -249,13 +251,13 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
             Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-            Vector2 a = new Vector2(camera.position.x - Gdx.graphics.getWidth() / 100 / 2 - 1, camera.position.y - Gdx.graphics.getHeight() / 100 / 2 - 1);
+            Vector2 a = new Vector2(camera.position.x - Game.size.x / 2 - 1, camera.position.y - Game.size.y / 2 - 1);
             Game.getCurrentScreen().shapeRenderer.setColor(new Color(255, 255, 255, 0.1f - camera.zoom / 200));
-            for (float x = ((float)Math.ceil(a.x)) - (((int) camera.zoom) + 1) * 10; x < ((float)Math.ceil(a.x)) + Gdx.graphics.getWidth() / 100 + camera.zoom * 10; x += 1) {
-                Game.getCurrentScreen().shapeRenderer.line(x, ((float)Math.ceil(a.y)) - (((int) camera.zoom) + 1) * 10, x, ((float)Math.ceil(a.y)) + Gdx.graphics.getHeight() / 100 + camera.zoom * 10);
+            for (float x = ((float)Math.ceil(a.x)) - (((int) camera.zoom) + 1) * 10; x < ((float)Math.ceil(a.x)) + Game.size.x + camera.zoom * 10; x += 1) {
+                Game.getCurrentScreen().shapeRenderer.line(x, ((float)Math.ceil(a.y)) - (((int) camera.zoom) + 1) * 10, x, ((float)Math.ceil(a.y)) + Game.size.y + camera.zoom * 10);
             }
-            for (float y = ((float)Math.ceil(a.y)) - (((int) camera.zoom) + 1) * 10; y < ((float)Math.ceil(a.y)) + Gdx.graphics.getHeight() / 100 + camera.zoom * 10; y += 1) {
-                Game.getCurrentScreen().shapeRenderer.line(((float)Math.ceil(a.x)) - (((int) camera.zoom) + 1) * 10, y, ((float)Math.ceil(a.x)) + Gdx.graphics.getWidth() / 100 + camera.zoom * 10, y);
+            for (float y = ((float)Math.ceil(a.y)) - (((int) camera.zoom) + 1) * 10; y < ((float)Math.ceil(a.y)) + Game.size.y + camera.zoom * 10; y += 1) {
+                Game.getCurrentScreen().shapeRenderer.line(((float)Math.ceil(a.x)) - (((int) camera.zoom) + 1) * 10, y, ((float)Math.ceil(a.x)) + Game.size.x + camera.zoom * 10, y);
             }
             Game.getCurrentScreen().shapeRenderer.end();
             Gdx.gl.glDisable(GL20.GL_BLEND);
@@ -305,8 +307,10 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public abstract void update();
 
     public void resize(int width, int height) {
-        Game.center = new Vector2(width / 2 / 100, height / 2 / 100);
+        Game.center = new Vector2(new Float(width) / 2 / 100, new Float(height) / 2 / 100);
+        Game.size = new Vector2(new Float(width) / 100, new Float(height) / 100);
         stage.getViewport().update(width, height);
+        camera.setToOrtho(false, new Float(width) / 100, new Float(height) / 100);
     }
 
     public void pause() {

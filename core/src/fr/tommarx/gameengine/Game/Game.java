@@ -30,6 +30,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
     public static TweenManager tweenManager;
     private static WaitAndDo waitAndDo;
     public static Vector2 center;
+    public static Vector2 size;
 
     public void create() {
         Box2D.init();
@@ -41,6 +42,7 @@ public abstract class Game extends com.badlogic.gdx.Game {
         tweenManager = new TweenManager();
         waitAndDo = new WaitAndDo();
         center = new Vector2(Gdx.graphics.getWidth() / 2 / 100, Gdx.graphics.getHeight() / 2 / 100);
+        size = new Vector2(Gdx.graphics.getWidth() / 100, Gdx.graphics.getHeight() / 100);
         init();
         Keys.init();
     }

@@ -1,5 +1,6 @@
 package fr.tommarx.gameenginetest;
 
+import java.io.IOException;
 import java.net.Socket;
 
 import fr.tommarx.gameengine.Game.Game;
@@ -7,7 +8,7 @@ import fr.tommarx.gameengine.Game.Screen;
 import fr.tommarx.gameengine.Net.ServerSocket;
 import fr.tommarx.gameengine.Net.SocketListener;
 
-public class ServerTest extends Screen{
+public class ServerTest extends Screen {
 
     ServerSocket server;
 
@@ -26,7 +27,7 @@ public class ServerTest extends Screen{
             }
 
             public void onDisconnection(Socket socket) {
-
+                System.out.println(socket.getInetAddress().getHostAddress() + " has quited");
             }
         });
     }
@@ -45,5 +46,13 @@ public class ServerTest extends Screen{
 
     public void show() {
 
+    }
+
+    public void dispose() {
+        try {
+            server.getSocket().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

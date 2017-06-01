@@ -2,6 +2,7 @@ package fr.tommarx.gameengine.Net;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.Callable;
 
 public class Socket {
 
@@ -15,7 +16,11 @@ public class Socket {
             if (listener != null) {
                 listener.onConnection(socket);
             }
-            new SocketHandler(socket, listener);
+            new SocketHandler(socket, listener, new Callable() {
+                public Object call() throws Exception {
+                    return null;
+                }
+            });
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.Callable;
 
 public class ServerSocket {
 
     private java.net.ServerSocket socket;
-    private ArrayList<Socket> clients;
     private Thread t;
+    private ArrayList<Socket> clients;
 
     public ServerSocket(int port, SocketListener listener) {
         try {
@@ -23,10 +24,16 @@ public class ServerSocket {
             public void run() {
                 while (true) {
                     try {
-                        clients.add(socket.accept());
-                        new SocketHandler(clients.get(clients.size() - 1), listener);
+                        Socket s = socket.accept();
+                        clients.add(s);
+                        new SocketHandler(s, listener, new Callable() {
+                            public Object call() throws Exception {
+                                clients.remove(s);
+                                return null;
+                            }
+                        });
                         if (listener != null) {
-                            listener.onConnection(clients.get(clients.size() - 1));
+                            listener.onConnection(s);
                         }
                     } catch (IOException e) {
                         e.printStackTrace();

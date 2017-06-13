@@ -12,7 +12,7 @@ public class SocketHandler {
     Thread t1, t2;
     boolean running = true;
 
-    public SocketHandler(Socket socket, SocketListener listener, Callable onDisconnected) {
+    public SocketHandler(final Socket socket, final SocketListener listener, final Callable onDisconnected) {
         try {
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {

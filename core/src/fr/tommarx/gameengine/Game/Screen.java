@@ -57,9 +57,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         this.game = game;
         camera = new OrthographicCamera(Game.size.x, Game.size.y);
         camera.position.set(Game.center.x, Game.center.y, 0);
-        drawables = new ArrayList<>();
-        drawablesHUD = new ArrayList<>();
-        toDelete = new ArrayList<>();
+        drawables = new ArrayList<Drawable>();
+        drawablesHUD = new ArrayList<Drawable>();
+        toDelete = new ArrayList<Drawable>();
         world = new World(new Vector2(0, -9.8f), true);
         colliderRenderer = new Box2DDebugRenderer();
         shapeRenderer = new ShapeRenderer();
@@ -183,7 +183,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     }
 
     private void kill(Drawable go) {
-        ArrayList<Drawable> _toDelete = new ArrayList<>();
+        ArrayList<Drawable> _toDelete = new ArrayList<Drawable>();
         for (Drawable d : drawables) {
             if (d.equals(go)) {
                 _toDelete.add(d);
@@ -273,7 +273,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
 
 
-        ArrayList<Drawable> toDelete2 = new ArrayList<>();
+        ArrayList<Drawable> toDelete2 = new ArrayList<Drawable>();
         for (Drawable d : toDelete) {
             kill(d);
             toDelete2.add(d);
@@ -362,7 +362,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     }
 
     public Array<Body> getBodies() {
-        Array<com.badlogic.gdx.physics.box2d.Body> bodies = new Array<>();
+        Array<com.badlogic.gdx.physics.box2d.Body> bodies = new Array<com.badlogic.gdx.physics.box2d.Body>();
         Game.getCurrentScreen().world.getBodies(bodies);
         return bodies;
     }

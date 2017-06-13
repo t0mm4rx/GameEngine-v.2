@@ -12,7 +12,7 @@ public class ServerSocket {
     private Thread t;
     private ArrayList<Socket> clients;
 
-    public ServerSocket(int port, SocketListener listener) {
+    public ServerSocket(int port, final SocketListener listener) {
         try {
             socket = new java.net.ServerSocket(port);
             clients = new ArrayList<Socket>();
@@ -24,7 +24,7 @@ public class ServerSocket {
             public void run() {
                 while (true) {
                     try {
-                        Socket s = socket.accept();
+                        final Socket s = socket.accept();
                         clients.add(s);
                         new SocketHandler(s, listener, new Callable() {
                             public Object call() throws Exception {

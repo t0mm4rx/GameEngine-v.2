@@ -12,8 +12,8 @@ public class ParticleManager extends Component {
 
     public ParticleManager(AbstractGameObject go) {
         super(go);
-        particles = new ArrayList<>();
-        toDelete = new ArrayList<>();
+        particles = new ArrayList<Particle>();
+        toDelete = new ArrayList<Particle>();
     }
 
     public void addParticle(Particle p) {

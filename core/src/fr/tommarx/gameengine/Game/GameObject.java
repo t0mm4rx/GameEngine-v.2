@@ -9,6 +9,14 @@ public class GameObject extends AbstractGameObject {
         super(transform);
     }
 
+    protected void drawBefore() {
+
+    }
+
+    protected void drawAfter() {
+
+    }
+
     protected void update(float delta) {
 
     }

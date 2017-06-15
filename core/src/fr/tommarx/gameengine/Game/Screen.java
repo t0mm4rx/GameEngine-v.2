@@ -29,6 +29,7 @@ import fr.tommarx.gameengine.Components.Transform;
 import fr.tommarx.gameengine.Easing.Tween;
 import fr.tommarx.gameengine.Easing.TweenListener;
 import fr.tommarx.gameengine.Util.LayoutSorter;
+import fr.tommarx.gameengine.Util.LightsRenderer;
 import fr.tommarx.gameengine.Util.Math;
 
 public abstract class Screen implements com.badlogic.gdx.Screen {
@@ -43,7 +44,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     public PolygonSpriteBatch polyBatch;
     public World world;
     private Box2DDebugRenderer colliderRenderer;
-    private boolean lightsEnabled;
+    public boolean lightsEnabled;
     private Vector2 lastCamPosition;
     protected String id;
     private GameObject overlay;
@@ -52,6 +53,7 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
     private Vector3 shakingLastCam = new Vector3();
     private boolean isShaking = false;
     private Stage stage;
+    private LightsRenderer lr;
 
     public Screen (Game game) {
         this.game = game;
@@ -77,6 +79,8 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         stage.setViewport(new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         Gdx.input.setInputProcessor(stage);
         id = UUID.randomUUID().toString();
+        lr = new LightsRenderer();
+        add(lr);
     }
 
     public abstract void renderBefore();
@@ -237,13 +241,6 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
         }
         renderAfter();
 
-        if (lightsEnabled) {
-            Game.batch.end();
-            rayHandler.setCombinedMatrix(camera);
-            rayHandler.updateAndRender();
-            Game.batch.begin();
-        }
-
         if (Game.debugging) {
             //Draw gride
             Game.batch.end();
@@ -379,5 +376,9 @@ public abstract class Screen implements com.badlogic.gdx.Screen {
 
     public Stage getStage() {
         return stage;
+    }
+
+    public void setLightsLayout(int z) {
+        lr.setLayout(z);
     }
 }

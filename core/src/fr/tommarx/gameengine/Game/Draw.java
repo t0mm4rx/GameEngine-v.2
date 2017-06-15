@@ -21,8 +21,8 @@ public class Draw {
         font.setColor(color);
         font.draw(Game.batch,
                 text,
-                x * 100 - glyphLayout.width / 2 / 100,
-                y * 100 - glyphLayout.height / 2 / 100
+                x * 100 - glyphLayout.width / 2,
+                y * 100 - glyphLayout.height / 2
         );
         Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined.cpy().scale(1f, 1f, 1f));
     }
@@ -90,6 +90,10 @@ public class Draw {
         Game.getCurrentScreen().shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
         Game.batch.begin();
+    }
+
+    public static void line(Vector2 p1, Vector2 p2, Color color) {
+        line(p1.x, p1.y, p2.x, p2.y, color);
     }
 
 }

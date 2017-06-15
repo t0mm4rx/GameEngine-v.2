@@ -28,13 +28,18 @@ public class BoxRenderer extends Component{
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
         Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
         Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        Game.getCurrentScreen().shapeRenderer.identity();
+        Game.getCurrentScreen().shapeRenderer.translate(getGameObject().getTransform().getPosition().x, getGameObject().getTransform().getPosition().y, 0.f);
+        Game.getCurrentScreen().shapeRenderer.rotate(0.f, 0.f, 1.f, getGameObject().getTransform().getRotation());
         Game.getCurrentScreen().shapeRenderer.setColor(color);
         Game.getCurrentScreen().shapeRenderer.rect(
-                getGameObject().getTransform().getPosition().x - width / 2 + offsetX,
-                getGameObject().getTransform().getPosition().y - height / 2 + offsetY,
+                - width / 2 + offsetX,
+                - height / 2 + offsetY,
                 width,
                 height
                 );
+        Game.getCurrentScreen().shapeRenderer.rotate(0.f, 0.f, 1.f, -getGameObject().getTransform().getRotation());
+        Game.getCurrentScreen().shapeRenderer.translate(-getGameObject().getTransform().getPosition().x, -getGameObject().getTransform().getPosition().y, 0.f);
         Game.getCurrentScreen().shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
         Game.batch.begin();

@@ -16,7 +16,8 @@ public class Touch {
 
     public static boolean isTouched(float x, float y, float width, float height) {
         if (isTouched()) {
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + width || Gdx.input.getY() > y && Gdx.input.getY() < y + height) {
+            Vector2 pos = getProjectedPosition();
+            if (pos.x > x - width / 2 && pos.x < x + width / 2 && pos.y > y - height / 2 && pos.y < y + height / 2) {
                 return true;
             }
         }
@@ -34,7 +35,8 @@ public class Touch {
 
     public static boolean isJustTouched(float x, float y, float width, float height) {
         if (isJustTouched()) {
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + width || Gdx.input.getY() > y && Gdx.input.getY() < y + height) {
+            Vector2 pos = getProjectedPosition();
+            if (pos.x > x - width / 2 && pos.x < x + width / 2 && pos.y > y - height / 2 && pos.y < y + height / 2) {
                 return true;
             }
         }

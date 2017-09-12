@@ -1,0 +1,14 @@
+package fr.tommarx.gameenginetest;
+
+import fr.tommarx.gameengine.Game.Game;
+
+public class GameClass extends Game {
+
+    public void init() {
+<<<<<<< HEAD
+        setScreen(new MeshScreen(this));
+=======
+        setScreen(new PropsTest(this));
+>>>>>>> 0f6b88929c5a948e8af3bef78f63b7281689b47a
+    }
+}

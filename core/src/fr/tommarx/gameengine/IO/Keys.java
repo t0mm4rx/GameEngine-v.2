@@ -15,8 +15,8 @@ public class Keys {
     private final static int THREESHOLD = 2;
 
     public static void init() {
-        keys = new HashMap<>();
-        keys1 = new HashMap<>();
+        keys = new HashMap<Integer, Integer>();
+        keys1 = new HashMap<Integer, Integer>();
         for (int i = 0; i < 256; i++) {
             keys.put(i, THREESHOLD);
             keys1.put(i, 0);

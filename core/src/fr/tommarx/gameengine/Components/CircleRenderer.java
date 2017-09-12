@@ -23,10 +23,10 @@ public class CircleRenderer extends Component{
         Game.batch.end();
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
-        Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix());
+        Game.getCurrentScreen().shapeRenderer.setProjectionMatrix(Game.batch.getProjectionMatrix().cpy());
         Game.getCurrentScreen().shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         Game.getCurrentScreen().shapeRenderer.setColor(color);
-        Game.getCurrentScreen().shapeRenderer.circle(getGameObject().getTransform().getPosition().x - radius / 2, getGameObject().getTransform().getPosition().y - radius / 2, radius);
+        Game.getCurrentScreen().shapeRenderer.circle(getGameObject().getTransform().getPosition().x, getGameObject().getTransform().getPosition().y, radius, 100);
         Game.getCurrentScreen().shapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
         Game.batch.begin();
@@ -53,4 +53,13 @@ public class CircleRenderer extends Component{
     public void dispose() {
 
     }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
 }

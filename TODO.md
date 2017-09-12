@@ -24,5 +24,6 @@
 - [x] Particles
 - [x] Bug draw texture sans argument scale
 - [x] Essayer afficher image centrée
+- [x] Sockets
 - [ ] Skeleton
 - [ ] Changer layout de la cam --> même résolution

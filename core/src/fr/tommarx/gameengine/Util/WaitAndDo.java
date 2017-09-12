@@ -9,7 +9,7 @@ public class WaitAndDo {
     private ArrayList<WaitAndDoAction> actions;
 
     public WaitAndDo () {
-        actions = new ArrayList<>();
+        actions = new ArrayList<WaitAndDoAction>();
     }
 
     public void WaitAndDo(float time, Callable callable) {
@@ -17,7 +17,7 @@ public class WaitAndDo {
     }
 
     public void update() {
-        ArrayList<WaitAndDoAction> actionsToDelete = new ArrayList<>();
+        ArrayList<WaitAndDoAction> actionsToDelete = new ArrayList<WaitAndDoAction>();
         for (int i = 0; i < actions.size(); i++) {
             WaitAndDoAction action = actions.get(i);
             if (System.currentTimeMillis() - action.timeB >= action.time) {

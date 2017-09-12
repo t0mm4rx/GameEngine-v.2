@@ -9,8 +9,8 @@ import fr.tommarx.gameengine.Game.Drawable;
 public class LayoutSorter {
 
     public static ArrayList<Drawable> sortByLayout(ArrayList<Drawable> target) {
-        ArrayList<Integer> zindexes = new ArrayList<>();
-        ArrayList<Drawable> finalList = new ArrayList<>();
+        ArrayList<Integer> zindexes = new ArrayList<Integer>();
+        ArrayList<Drawable> finalList = new ArrayList<Drawable>();
 
         for (Drawable d : target) {
             if (!zindexes.contains(d.getLayout())) {
@@ -33,8 +33,8 @@ public class LayoutSorter {
     }
 
     public static ArrayList<Component> sortComponentsByLayout(ArrayList<Component> target) {
-        ArrayList<Integer> zindexes = new ArrayList<>();
-        ArrayList<Component> finalList = new ArrayList<>();
+        ArrayList<Integer> zindexes = new ArrayList<Integer>();
+        ArrayList<Component> finalList = new ArrayList<Component>();
 
         for (Component d : target) {
             if (!zindexes.contains(d.getLayout())) {
@@ -57,8 +57,8 @@ public class LayoutSorter {
     }
 
     public static ArrayList<Particle> sortParticlesByLayout(ArrayList<Particle> target) {
-        ArrayList<Integer> zindexes = new ArrayList<>();
-        ArrayList<Particle> finalList = new ArrayList<>();
+        ArrayList<Integer> zindexes = new ArrayList<Integer>();
+        ArrayList<Particle> finalList = new ArrayList<Particle>();
 
         for (Particle d : target) {
             if (!zindexes.contains(d.getLayout())) {

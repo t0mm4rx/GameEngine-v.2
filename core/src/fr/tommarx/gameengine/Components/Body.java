@@ -17,7 +17,7 @@ public class Body extends Component {
         super(go);
     }
 
-    protected void initBody(BodyDef.BodyType type, FixtureDef def) {
+    public void initBody(BodyDef.BodyType type, FixtureDef def) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = type;
         bodyDef.position.set((getGameObject().getTransform().getPosition().x + offsetX), (getGameObject().getTransform().getPosition().y + offsetY));
@@ -25,6 +25,11 @@ public class Body extends Component {
         bodyDef.linearDamping = 3f;
         body = Game.getCurrentScreen().world.createBody(bodyDef);
         body.createFixture(def);
+    }
+
+    public void initBody(BodyDef def, FixtureDef fdef) {
+        body = Game.getCurrentScreen().world.createBody(def);
+        body.createFixture(fdef);
     }
 
     public void render() {}

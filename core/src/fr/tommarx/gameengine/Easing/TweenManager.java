@@ -7,7 +7,7 @@ public class TweenManager {
     ArrayList<Tween> tweens;
 
     public TweenManager () {
-        tweens = new ArrayList<>();
+        tweens = new ArrayList<Tween>();
     }
 
     public void addTween(Tween tween) {
@@ -15,7 +15,7 @@ public class TweenManager {
     }
 
     public void update() {
-        ArrayList<Tween> toDelete = new ArrayList<>();
+        ArrayList<Tween> toDelete = new ArrayList<Tween>();
         for (int i = 0; i < tweens.size(); i++) {
             Tween tween = tweens.get(i);
             if (tween.isFinished()) {

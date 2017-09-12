@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
+import java.awt.Font;
+
 import fr.tommarx.gameengine.Game.AbstractGameObject;
 import fr.tommarx.gameengine.Game.Game;
 
@@ -16,12 +18,22 @@ public class Text extends Component {
     BitmapFont font;
     GlyphLayout glyphLayout;
     Color color;
-    int offsetX, offsetY;
+    float offsetX, offsetY;
 
     public Text(AbstractGameObject go, String text, Color color) {
         super(go);
         this.text = text;
         font = new BitmapFont();
+        glyphLayout = new GlyphLayout();
+        this.color = color;
+        offsetX = 0;
+        offsetY = 0;
+    }
+
+    public Text(AbstractGameObject go, BitmapFont font, String text, Color color) {
+        super(go);
+        this.text = text;
+        this.font = font;
         glyphLayout = new GlyphLayout();
         this.color = color;
         offsetX = 0;
@@ -48,8 +60,8 @@ public class Text extends Component {
         font.setColor(color);
         font.draw(Game.batch,
                 text,
-                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 / 100 + offsetX,
-                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 / 100 + offsetY
+                getGameObject().getTransform().getPosition().x * 100 - glyphLayout.width / 2 + offsetX * 100,
+                getGameObject().getTransform().getPosition().y * 100 - glyphLayout.height / 2 + offsetY * 100
         );
         Game.batch.setProjectionMatrix(Game.getCurrentScreen().camera.combined.cpy().scale(1f, 1f, 1f));
     }
@@ -65,9 +77,13 @@ public class Text extends Component {
         );
     }
 
-    public void setOffset(int x, int y) {
+    public void setOffset(float x, float y) {
         this.offsetX = x;
         this.offsetY = y;
+    }
+
+    public String getText() {
+        return text;
     }
 
     public Color getColor () {

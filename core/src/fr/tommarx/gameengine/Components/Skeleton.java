@@ -16,7 +16,6 @@ public class Skeleton extends Component {
     }
 
     public void addBone(Bone bone) {
-        Game.getCurrentScreen().add(bone);
         bones.add(bone);
     }
 

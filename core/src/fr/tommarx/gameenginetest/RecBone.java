@@ -8,6 +8,7 @@ import fr.tommarx.gameengine.Components.Body;
 import fr.tommarx.gameengine.Components.BoxBody;
 import fr.tommarx.gameengine.Components.BoxRenderer;
 import fr.tommarx.gameengine.Game.AbstractGameObject;
+import fr.tommarx.gameengine.Game.Game;
 import fr.tommarx.gameengine.Util.Bone;
 
 public class RecBone extends Bone {
@@ -19,11 +20,7 @@ public class RecBone extends Bone {
         b = new BoxBody(this, .1f, length, BodyDef.BodyType.DynamicBody, false);
         b.getBody().getTransform().setRotation(angle);
         addComponent(b);
-        go.addComponent(new BoxRenderer(this, .1f, length, new Color(1, 1, 1, 1)));
-    }
-
-    public void render() {
-
+        addComponent(new BoxRenderer(this, .1f, length, new Color(1, 1, 1, 1)));
     }
 
     protected void update(float delta) {

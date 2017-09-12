@@ -22,10 +22,6 @@ public class RoundBone extends Bone {
         addComponent(new CircleRenderer(this, radius, new Color(1, 1, 1, 1)));
     }
 
-    public void render() {
-
-    }
-
     protected void update(float delta) {
         b.getBody().setAwake(true);
     }
